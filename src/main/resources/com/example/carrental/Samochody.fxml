@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.SamochodyControler">
+   <children>
+      <Pane layoutX="576.0" layoutY="71.0" prefHeight="541.0" prefWidth="0.0" />
+      <TextField layoutX="14.0" layoutY="26.0" prefHeight="25.0" prefWidth="375.0" />
+      <Button layoutX="541.0" layoutY="26.0" mnemonicParsing="false" text="Button" />
+      <ChoiceBox layoutX="408.0" layoutY="26.0" prefHeight="25.0" prefWidth="119.0" />
+      <TableView fx:id="tabela" layoutX="14.0" layoutY="71.0" prefHeight="507.0" prefWidth="582.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
+            <TableColumn fx:id="marka" prefWidth="112.0" text="Marka" />
+            <TableColumn fx:id="model" prefWidth="134.0" text="Model" />
+            <TableColumn fx:id="nrRejestracji" prefWidth="130.0" text="nrRejestracji" />
+            <TableColumn fx:id="cena" prefWidth="130.0" text="Cena" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>

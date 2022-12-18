@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.calendarfx.view.page.MonthPage?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.model.Wynajem">
+   <children>
+      <TabPane prefHeight="640.0" prefWidth="920.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <Pane prefHeight="611.0" prefWidth="409.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Pane layoutX="16.0" layoutY="41.0" prefHeight="507.0" prefWidth="374.0" style="-fx-background-color: white;" />
+                           </children>
+                        </Pane>
+                     </left>
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <MonthPage layoutX="7.0" layoutY="23.0" prefHeight="573.0" prefWidth="492.0" />
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+          <Tab text="Untitled Tab 2">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </center>
+                     <left>
+                        <Pane prefHeight="611.0" prefWidth="337.0" BorderPane.alignment="CENTER" />
+                     </left>
+                  </BorderPane>
+               </content></Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

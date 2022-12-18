@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.model.Home">
+   <children>
+      <Pane layoutX="109.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: limegreen;" />
+      <Pane layoutX="360.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: deepskyblue;" />
+      <StackedBarChart layoutX="79.0" layoutY="170.0" prefHeight="400.0" prefWidth="562.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </StackedBarChart>
+   </children>
+</AnchorPane>

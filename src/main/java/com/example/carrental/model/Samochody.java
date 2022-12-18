@@ -1,0 +1,9 @@
+package com.example.carrental.model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+public class Samochody {
+
+}

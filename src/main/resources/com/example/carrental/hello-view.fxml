@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.HelloController">
+   <left>
+      <Pane prefHeight="640.0" prefWidth="120.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
+         <children>
+            <FontAwesomeIconView glyphName="CAR" layoutX="35.0" layoutY="55.0" size="48.0" wrappingWidth="15.0" />
+            <Button layoutX="33.0" layoutY="110.0" mnemonicParsing="false" onAction="#OpenHome" text="Button" />
+            <Button layoutX="33.0" layoutY="158.0" mnemonicParsing="false" onAction="#printHelloWorld" text="Button" />
+            <Button layoutX="33.0" layoutY="200.0" mnemonicParsing="false" onAction="#OpenRents" text="Button" />
+         </children>
+      </Pane>
+   </left>
+</BorderPane>
