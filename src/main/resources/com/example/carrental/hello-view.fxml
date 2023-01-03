@@ -10,9 +10,11 @@
       <Pane prefHeight="640.0" prefWidth="120.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
          <children>
             <FontAwesomeIconView glyphName="CAR" layoutX="35.0" layoutY="55.0" size="48.0" wrappingWidth="15.0" />
-            <Button layoutX="33.0" layoutY="110.0" mnemonicParsing="false" onAction="#OpenHome" text="Button" />
-            <Button layoutX="33.0" layoutY="158.0" mnemonicParsing="false" onAction="#printHelloWorld" text="Button" />
-            <Button layoutX="33.0" layoutY="200.0" mnemonicParsing="false" onAction="#OpenRents" text="Button" />
+            <Button layoutX="-2.0" layoutY="110.0" mnemonicParsing="false" onAction="#OpenHome" prefHeight="25.0" prefWidth="123.0" text="Home" />
+            <Button layoutX="-1.0" layoutY="158.0" mnemonicParsing="false" onAction="#printHelloWorld" prefHeight="25.0" prefWidth="121.0" text="Samochody" />
+            <Button layoutX="-1.0" layoutY="200.0" mnemonicParsing="false" onAction="#OpenRents" prefHeight="25.0" prefWidth="121.0" text="Wpozycz" />
+            <Button layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Klienci" />
+            <Button layoutX="-1.0" layoutY="284.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Ustawienia" />
          </children>
       </Pane>
    </left>

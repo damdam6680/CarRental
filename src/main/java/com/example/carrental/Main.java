@@ -1,18 +1,14 @@
 package com.example.carrental;
 
-import com.example.carrental.model.Samochody;
-import com.example.carrental.util.HibernateUtil;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+
 
 import java.io.IOException;
-import java.util.List;
+
 
 public class Main extends Application {
     @Override
