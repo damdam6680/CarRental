@@ -6,7 +6,6 @@ module com.example.carrental {
     requires java.naming;
     requires java.sql;
     requires jakarta.persistence;
-
    // opens com.example.carrental to javafx.fxml;
     exports com.example.carrental;
     exports com.example.carrental.model;

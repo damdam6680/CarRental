@@ -90,16 +90,16 @@ public class SamochodyControler implements Initializable {
 
     ObservableList<Samochody> samochodyObservableList = FXCollections.observableArrayList();
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        id.setCellValueFactory(new PropertyValueFactory<Samochody, Integer>("idSamochodu"));
-        marka.setCellValueFactory(new PropertyValueFactory<Samochody, String>("Marka"));
-        model.setCellValueFactory(new PropertyValueFactory<Samochody, String>("Model"));
-        nrRejestracji.setCellValueFactory(new PropertyValueFactory<Samochody, String>("NrRejestracji"));
-        cena.setCellValueFactory(new PropertyValueFactory<Samochody, String>("CenaZaDzien"));
-        fetchData();
-        for (Samochody temp : samochodylist) {
-            samochodyObservableList.add(temp);
-        }
-        tabela.setItems(samochodyObservableList);
+//        id.setCellValueFactory(new PropertyValueFactory<Samochody, Integer>("idSamochodu"));
+//        marka.setCellValueFactory(new PropertyValueFactory<Samochody, String>("Marka"));
+//        model.setCellValueFactory(new PropertyValueFactory<Samochody, String>("Model"));
+//        nrRejestracji.setCellValueFactory(new PropertyValueFactory<Samochody, String>("NrRejestracji"));
+//        cena.setCellValueFactory(new PropertyValueFactory<Samochody, String>("CenaZaDzien"));
+//        fetchData();
+//        for (Samochody temp : samochodylist) {
+//            samochodyObservableList.add(temp);
+//        }
+//        tabela.setItems(samochodyObservableList);
 
     }
 

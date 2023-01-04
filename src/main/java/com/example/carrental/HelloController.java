@@ -34,4 +34,9 @@ public class HelloController {
         Pane v = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("wynajem.fxml")));
         root.setCenter(v);
     }
+    public void OpenKlients(ActionEvent actionEvent) throws IOException {
+        Pane v = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("klienci.fxml")));
+        root.setCenter(v);
+    }
+
 }
