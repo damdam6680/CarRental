@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.SamochodyControler">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.SamochodyControler">
    <children>
       <Pane layoutX="576.0" layoutY="71.0" prefHeight="541.0" prefWidth="0.0" />
       <TextField fx:id="SaearchBar" layoutX="14.0" layoutY="26.0" onKeyPressed="#wyszukiwanie" prefHeight="25.0" prefWidth="375.0" />

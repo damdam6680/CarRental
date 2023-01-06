@@ -6,18 +6,22 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.KlienciController">
+<AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.KlienciController">
    <children>
-      <TableView layoutY="66.0" prefHeight="569.0" prefWidth="920.0">
+      <TableView fx:id="tab" layoutY="66.0" prefHeight="569.0" prefWidth="920.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="idTab" prefWidth="75.0" text="idKlienci " />
+          <TableColumn fx:id="ImieTab" prefWidth="123.0" text="Imie" />
+            <TableColumn fx:id="NazwiskoTab" prefWidth="134.0" text="Nazwisko" />
+            <TableColumn fx:id="peselTab" prefWidth="120.0" text="pesel" />
+            <TableColumn fx:id="PrawoJazdyTab" prefWidth="132.0" text="PrawoJazdy" />
+            <TableColumn fx:id="TelefonTab" prefWidth="151.0" text="Telefon" />
+            <TableColumn fx:id="AdresTab" prefWidth="184.0" text="Adres" />
         </columns>
       </TableView>
-      <Button layoutX="751.0" layoutY="22.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="676.0" layoutY="22.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="826.0" layoutY="22.0" mnemonicParsing="false" text="Button" />
-      <TextField layoutX="36.0" layoutY="22.0" prefHeight="25.0" prefWidth="625.0" />
+      <Button layoutX="720.0" layoutY="22.0" mnemonicParsing="false" onAction="#dodaj" text="Dodaj" />
+      <Button layoutX="833.0" layoutY="22.0" mnemonicParsing="false" onAction="#loadAllData" prefHeight="25.0" prefWidth="66.0" text="Odświerz" />
+      <TextField fx:id="text" layoutX="36.0" layoutY="22.0" onKeyPressed="#wyszukiwanie" prefHeight="25.0" prefWidth="625.0" />
+      <Button layoutX="774.0" layoutY="22.0" mnemonicParsing="false" onAction="#usun" prefHeight="25.0" prefWidth="48.0" text="Usuń" />
    </children>
 </AnchorPane>

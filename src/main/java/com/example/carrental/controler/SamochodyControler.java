@@ -1,4 +1,4 @@
-package com.example.carrental;
+package com.example.carrental.controler;
 
 
 import com.example.carrental.model.Samochody;
@@ -90,31 +90,26 @@ public class SamochodyControler implements Initializable {
 
     ObservableList<Samochody> samochodyObservableList = FXCollections.observableArrayList();
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        id.setCellValueFactory(new PropertyValueFactory<Samochody, Integer>("idSamochodu"));
-//        marka.setCellValueFactory(new PropertyValueFactory<Samochody, String>("Marka"));
-//        model.setCellValueFactory(new PropertyValueFactory<Samochody, String>("Model"));
-//        nrRejestracji.setCellValueFactory(new PropertyValueFactory<Samochody, String>("NrRejestracji"));
-//        cena.setCellValueFactory(new PropertyValueFactory<Samochody, String>("CenaZaDzien"));
-//        fetchData();
-//        for (Samochody temp : samochodylist) {
-//            samochodyObservableList.add(temp);
-//        }
-//        tabela.setItems(samochodyObservableList);
+        id.setCellValueFactory(new PropertyValueFactory<Samochody, Integer>("idSamochodu"));
+        marka.setCellValueFactory(new PropertyValueFactory<Samochody, String>("Marka"));
+        model.setCellValueFactory(new PropertyValueFactory<Samochody, String>("Model"));
+        nrRejestracji.setCellValueFactory(new PropertyValueFactory<Samochody, String>("NrRejestracji"));
+        cena.setCellValueFactory(new PropertyValueFactory<Samochody, String>("CenaZaDzien"));
+        fetchData();
+        for (Samochody temp : samochodylist) {
+            samochodyObservableList.add(temp);
+        }
+        tabela.setItems(samochodyObservableList);
 
     }
 
     public void wybrane() {
         Samochody samochody1 = tabela.getSelectionModel().getSelectedItem();
-
-
         idText.setText(String.valueOf(samochody1.getIdSamochodu()));
         ModelText.setText(String.valueOf(samochody1.getModel()));
         MarkaText.setText(String.valueOf(samochody1.getMarka()));
         RejestracjiaText.setText(String.valueOf(samochody1.getNrRejestracji()));
         CenaText.setText(String.valueOf(samochody1.getCenaZaDzien()));
-
-
-
     }
     public void editData() {
         Configuration config = new Configuration().configure();
@@ -207,22 +202,22 @@ public class SamochodyControler implements Initializable {
         FilteredList<Samochody> filteredList = new FilteredList<>(samochodyObservableList, e -> true);
 
         SaearchBar.textProperty().addListener((Observable, oldValue, newValue) -> {
-            filteredList.setPredicate(predicateCarData -> {
+            filteredList.setPredicate(predicateKlientData -> {
 
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
 
                 String searchKey = newValue.toLowerCase();
-                if (predicateCarData.getModel().toLowerCase().contains(searchKey)) {
+                if (predicateKlientData.getModel().toLowerCase().contains(searchKey)) {
                     return true;
-                } else if (predicateCarData.getMarka().toLowerCase().contains(searchKey)) {
+                } else if (predicateKlientData.getMarka().toLowerCase().contains(searchKey)) {
                     return true;
-                } else if (predicateCarData.getNrRejestracji().toLowerCase().contains(searchKey)) {
+                } else if (predicateKlientData.getNrRejestracji().toLowerCase().contains(searchKey)) {
                     return true;
-                } else if (predicateCarData.getCenaZaDzien().toLowerCase().contains(searchKey)) {
+                } else if (predicateKlientData.getCenaZaDzien().toLowerCase().contains(searchKey)) {
                     return true;
-                } else if (String.valueOf(predicateCarData.getIdSamochodu()).toString().contains(searchKey)) {
+                } else if (String.valueOf(predicateKlientData.getIdSamochodu()).toString().contains(searchKey)) {
                     return true;
                 } else {
                     return false;
