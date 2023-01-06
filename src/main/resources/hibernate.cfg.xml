@@ -11,10 +11,13 @@
         <property name="hibernate.show_sql">true</property>
         <!-- scieżka do klasy sterownika -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- Opcja umożliwia zdefiniowanie zachowania przy łączeniu z bazą danych. create-drop usunie tabele a następnie utworzy je na nowo -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         <!-- Wskazanie klas mapujących tabele w bazie danych na obiekty java. -->
         <mapping class="com.example.carrental.model.Samochody"/>
+        <mapping class="com.example.carrental.model.Klienci"/>
+        <mapping class="com.example.carrental.model.Wynajem"/>
     </session-factory>
 </hibernate-configuration>

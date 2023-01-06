@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.calendarfx.view.page.MonthPage?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.WynajemControler">
    <children>
@@ -17,9 +23,27 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <left>
-                        <Pane prefHeight="611.0" prefWidth="409.0" BorderPane.alignment="CENTER">
+                        <Pane prefHeight="611.0" prefWidth="447.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Pane layoutX="16.0" layoutY="41.0" prefHeight="507.0" prefWidth="374.0" style="-fx-background-color: white;" />
+                              <Pane layoutX="16.0" layoutY="41.0" prefHeight="507.0" prefWidth="415.0" style="-fx-background-color: white;">
+                                 <children>
+                                    <TextField fx:id="NrRachunku" layoutX="59.0" layoutY="33.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <ChoiceBox fx:id="idKlienta" layoutX="60.0" layoutY="86.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <Button layoutX="349.0" layoutY="86.0" mnemonicParsing="false" text="Button" />
+                                    <Button layoutX="349.0" layoutY="150.0" mnemonicParsing="false" text="Button" />
+                                    <DatePicker fx:id="od" layoutX="60.0" layoutY="206.0" prefHeight="25.0" prefWidth="273.0" />
+                                    <DatePicker fx:id="dodata" layoutX="60.0" layoutY="254.0" prefHeight="25.0" prefWidth="273.0" />
+                                    <Text layoutX="59.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr Rachunku" wrappingWidth="83.390625" />
+                                    <Text layoutX="59.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id Klienta" wrappingWidth="83.390625" />
+                                    <Text layoutX="59.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id Samochodu" wrappingWidth="83.390625" />
+                                    <Text layoutX="59.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="od" wrappingWidth="83.390625" />
+                                    <Text layoutX="59.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="do" wrappingWidth="83.390625" />
+                                    <TextArea fx:id="komentarz" layoutX="58.0" layoutY="358.0" prefHeight="70.0" prefWidth="278.0" />
+                                    <Text layoutX="58.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Komentarz" />
+                                    <TextField fx:id="cena" layoutX="58.0" layoutY="298.0" prefHeight="25.0" prefWidth="277.0" />
+                                    <Text layoutX="60.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cena" />
+                                    <TextField fx:id="idSamochodutext" layoutX="58.0" layoutY="150.0" prefHeight="25.0" prefWidth="281.0" />
+                                 </children></Pane>
                            </children>
                         </Pane>
                      </left>

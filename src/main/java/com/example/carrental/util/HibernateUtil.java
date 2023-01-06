@@ -1,36 +1,34 @@
 package com.example.carrental.util;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
-    private static SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
-    private static SessionFactory buildSessionFactory() {
-        try {
-            // Create the SessionFactory from hibernate.cfg.xml
-            Configuration configuration = new Configuration();
-            configuration.configure("hibernate.cfg.xml");
-            System.out.println("Hibernate Configuration loaded");
+    public HibernateUtil() {
 
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-            System.out.println("Hibernate serviceRegistry created");
-
-            SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-            return sessionFactory;
-        }
-        catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            ex.printStackTrace();
-            throw new ExceptionInInitializerError(ex);
-        }
+        createSessionFactory();
     }
 
-    public static SessionFactory getSessionFactory() {
-        if(sessionFactory == null) sessionFactory = buildSessionFactory();
+    private void createSessionFactory() {
+
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure()
+                .build();
+
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    }
+
+    public SessionFactory getSessionFactory() {
+
         return sessionFactory;
+    }
+
+    public void shutdown() {
+
+        getSessionFactory().close();
     }
 }
