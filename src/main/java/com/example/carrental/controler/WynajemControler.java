@@ -1,15 +1,22 @@
 package com.example.carrental.controler;
 
+import com.example.carrental.model.Klienci;
 import com.example.carrental.model.Samochody;
 import com.example.carrental.model.Wynajem;
 
-import com.jfoenix.controls.JFXAutoCompletePopup;
+
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import org.controlsfx.control.textfield.TextFields;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -34,8 +41,10 @@ public class WynajemControler implements Initializable {
     private DatePicker dodata;
 
     @FXML
-    private ChoiceBox<?> idKlienta;
+    private ComboBox<Klienci> idKleinta123;
 
+    @FXML
+    private ComboBox<Samochody> idSamochoduText;
 
     @FXML
     private TextArea komentarz;
@@ -43,17 +52,24 @@ public class WynajemControler implements Initializable {
     @FXML
     private DatePicker od;
 
-    private List<Wynajem> Wynajemlist;
-
     private List<Samochody> samochodylist;
+    private List<Klienci> KlienciList;
 
-    @FXML
-    private TextField idSamochodutext;
+
+
+
+    ObservableList<Samochody> samochodyObservableList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+            fetchDataCar();
+            fetchDataKlient();
+            idSamochoduText.getItems().setAll(samochodylist);
+            idKleinta123.getItems().setAll(KlienciList);
+
     }
 
-    public void fetchData() {
+    public void fetchDataCar() {
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Samochody.class);
 
@@ -63,19 +79,61 @@ public class WynajemControler implements Initializable {
 
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
-        samochodylist = loadAllData(Samochody.class, session);
+        samochodylist = loadAllDataCar(Samochody.class, session);
         System.out.println(Arrays.toString(samochodylist.toArray()));
         transaction.commit();
         session.close();
     }
 
-    private static <T> List<T> loadAllData(Class<T> type, Session session) {
+    private static <T> List<T> loadAllDataCar(Class<T> type, Session session) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
         criteria.from(type);
-        List<T> data = session.createQuery("select NrRejestracji from Samochody").getResultList();
+        List<T> data = session.createQuery("select idSamochodu from Samochody").getResultList();
+        return data;
+    }
+    public void fetchDataKlient() {
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Klienci.class);
+
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        KlienciList = loadAllDataKlienta(Klienci.class, session);
+        System.out.println(Arrays.toString(KlienciList.toArray()));
+        transaction.commit();
+        session.close();
+    }
+
+    private static <T> List<T> loadAllDataKlienta(Class<T> type, Session session) {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery(type);
+        criteria.from(type);
+        List<T> data = session.createQuery("select idKlienci  from Klienci").getResultList();
         return data;
     }
 
 
+    public void InfoSamochody(ActionEvent actionEvent) {
+        try {
+            URL fxmlLocation = getClass().getResource("/com/example/carrental/infoCar.fxml");
+            System.out.println(fxmlLocation);
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+
+            InfoCarControler infoCarControler = fxmlLoader.getController();
+
+            System.out.println(idSamochoduText.getValue());
+            infoCarControler.fetchData(String.valueOf(idSamochoduText.getValue()));
+            stage.setTitle("Info");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 }

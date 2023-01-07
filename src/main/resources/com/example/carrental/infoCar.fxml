@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="558.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.InfoCarControler">
+   <children>
+      <TextField fx:id="idText" layoutX="15.0" layoutY="47.0" prefHeight="25.0" prefWidth="422.0" />
+      <TextField fx:id="idMarka" layoutX="19.0" layoutY="115.0" prefHeight="25.0" prefWidth="422.0" />
+      <TextField fx:id="idModel" layoutX="19.0" layoutY="185.0" prefHeight="25.0" prefWidth="422.0" />
+      <TextField fx:id="idNrRejestracji" layoutX="19.0" layoutY="254.0" prefHeight="25.0" prefWidth="422.0" />
+      <TextField fx:id="idCena" layoutX="19.0" layoutY="314.0" prefHeight="25.0" prefWidth="422.0" />
+      <Text layoutX="19.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id" />
+      <Text layoutX="19.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marka" />
+      <Text layoutX="19.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model" />
+      <Text layoutX="19.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nrRejestracji" />
+      <Text layoutX="19.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cena" />
+   </children>
+</AnchorPane>
