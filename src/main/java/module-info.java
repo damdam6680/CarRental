@@ -12,5 +12,6 @@ module com.example.carrental {
     exports com.example.carrental.controler;
     requires transitive javafx.graphics ;
     requires swingx;
+    requires itextpdf;
 
 }

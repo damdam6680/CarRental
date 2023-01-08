@@ -2,14 +2,22 @@ package com.example.carrental.controler;
 
 
 import com.example.carrental.model.Samochody;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,12 +29,29 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.net.URL;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
 
 public class SamochodyControler implements Initializable {
+    @FXML
+    private Label Clabel;
+
+    @FXML
+    private Label Lmarka;
+
+    @FXML
+    private Label Lmodel;
+
+    @FXML
+    private Label NLabel;
     @FXML
     private TableView<Samochody> tabela;
 
@@ -160,11 +185,13 @@ public class SamochodyControler implements Initializable {
         samochody2.setMarka(MarkaText.getText());
         samochody2.setNrRejestracji(RejestracjiaText.getText());
         samochody2.setCenaZaDzien(CenaText.getText());
+        walidacja();
 
-
-        session.persist(samochody2);
-        transaction.commit();
-        session.close();
+        if(isNrRejestracjiOK(RejestracjiaText.getText()) && isCenaOk(CenaText.getText())) {
+            session.persist(samochody2);
+            transaction.commit();
+            session.close();
+        }
     }
 
     public void dealeatData() {
@@ -230,4 +257,74 @@ public class SamochodyControler implements Initializable {
         });
     }
 
+    private boolean isNrRejestracjiOK(String s){
+        return s.matches("[AZ]{2}([AZ]|[09])[09]{4}") ;
+    }
+    private boolean isCenaOk(String s){
+        return s.matches("-?\\d+(\\.\\d+)?");
+    }
+
+    public void walidacja(){
+        if(!isNrRejestracjiOK(RejestracjiaText.getText()) || RejestracjiaText.getText().equals("")){
+            NLabel.setVisible(true);
+            NLabel.setText("podałeś zła rejestracjie");
+        }
+        else if(isNrRejestracjiOK(RejestracjiaText.getText())){
+            NLabel.setVisible(false);
+        }
+        if(!isCenaOk(CenaText.getText()) || CenaText.getText().equals("")){
+            Clabel.setVisible(true);
+            Clabel.setText("nie podałeś cyfry");
+        }else if(isCenaOk(CenaText.getText())){
+            Clabel.setVisible(false);
+        }
+    }
+
+
+    @FXML
+    private void pdfs()
+            throws Exception {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/car", "root", "");
+            Statement stmt = con.createStatement();
+            ResultSet query_set = stmt.executeQuery("SELECT * From Samochody");
+            Document my_pdf_report = new Document();
+            PdfWriter.getInstance(my_pdf_report, new FileOutputStream("samochody.pdf"));
+            my_pdf_report.open();
+            PdfPTable my_report_table = new PdfPTable(5);
+            PdfPCell table_cell;
+
+            while (query_set.next()) {
+                String index = query_set.getString("idSamochodu");
+                table_cell = new PdfPCell(new Phrase(index));
+                my_report_table.addCell(table_cell);
+                String imie = query_set.getString("Marka");
+                table_cell = new PdfPCell(new Phrase(imie));
+                my_report_table.addCell(table_cell);
+                String nazwisko = query_set.getString("Model");
+                table_cell = new PdfPCell(new Phrase(nazwisko));
+                my_report_table.addCell(table_cell);
+                String plec = query_set.getString("NrRejestracji");
+                table_cell = new PdfPCell(new Phrase(plec));
+                my_report_table.addCell(table_cell);
+                String data = query_set.getString("CenaZaDzien");
+                table_cell = new PdfPCell(new Phrase(data));
+                my_report_table.addCell(table_cell);
+            }
+            my_pdf_report.add(my_report_table);
+            my_pdf_report.close();
+            query_set.close();
+            stmt.close();
+            con.close();
+
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (DocumentException e) {
+
+            e.printStackTrace();
+        }
+    }
 }

@@ -2,7 +2,7 @@ package com.example.carrental.controler;
 
 import com.example.carrental.model.Klienci;
 import com.example.carrental.model.Samochody;
-import com.example.carrental.model.Wynajem;
+
 
 
 import jakarta.persistence.criteria.CriteriaBuilder;
