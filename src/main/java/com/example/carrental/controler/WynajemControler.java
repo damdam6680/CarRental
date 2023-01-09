@@ -4,7 +4,9 @@ import com.example.carrental.model.Klienci;
 import com.example.carrental.model.Samochody;
 
 
-
+import com.example.carrental.model.Wynajem;
+import com.example.carrental.util.HibernateUtil;
+import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import javafx.collections.FXCollections;
@@ -17,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -25,9 +28,8 @@ import org.hibernate.cfg.Configuration;
 
 
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.nio.charset.Charset;
+import java.util.*;
 
 public class WynajemControler implements Initializable {
 
@@ -64,6 +66,7 @@ public class WynajemControler implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
             fetchDataCar();
             fetchDataKlient();
+
             idSamochoduText.getItems().setAll(samochodylist);
             idKleinta123.getItems().setAll(KlienciList);
 
@@ -128,12 +131,65 @@ public class WynajemControler implements Initializable {
             InfoCarControler infoCarControler = fxmlLoader.getController();
 
             System.out.println(idSamochoduText.getValue());
+
             infoCarControler.fetchData(String.valueOf(idSamochoduText.getValue()));
+            infoCarControler.wypisz();
             stage.setTitle("Info");
             stage.setScene(new Scene(root));
             stage.show();
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    public void WyswietlCene(ActionEvent actionEvent) {
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Samochody.class);
+
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("select CenaZaDzien from Samochody WHERE idSamochodu = :id");
+        query.setParameter("id",idSamochoduText.getValue());
+        String cena1 = query.getSingleResult().toString();
+        cena.setText(cena1);
+        transaction.commit();
+        session.close();
+
+    }
+
+    public void Wygeneruj(ActionEvent actionEvent) {
+        String generatedString = RandomStringUtils.randomAlphabetic(11).toUpperCase(Locale.ROOT);
+
+        NrRachunku.setText(generatedString);
+    }
+
+    public void Dodaj(ActionEvent actionEvent) {
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Wynajem.class);
+
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Wynajem wynajem = new Wynajem();
+
+       // wynajem.setIdWynajem(Integer.parseInt(NrRachunku.getText()));
+        wynajem.setCena(Double.parseDouble(cena.getText()));
+        wynajem.setDo(dodata.getValue());
+        wynajem.setOd(od.getValue());
+       // wynajem.setKlienciList(idKleinta123.getValue().toString());
+        //wynajem.setSamochodyList(idSamochoduText.getValue().toString());
+        wynajem.setKomentarz(komentarz.getText());
+
+
+        session.persist(wynajem);
+        transaction.commit();
+        session.close();
     }
 }

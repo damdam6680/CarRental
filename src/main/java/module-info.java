@@ -13,5 +13,5 @@ module com.example.carrental {
     requires transitive javafx.graphics ;
     requires swingx;
     requires itextpdf;
-
+    requires org.apache.commons.lang3;
 }

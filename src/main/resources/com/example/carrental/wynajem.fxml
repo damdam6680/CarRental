@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.WynajemControler">
@@ -28,7 +29,7 @@
                               <Pane layoutX="16.0" layoutY="41.0" prefHeight="507.0" prefWidth="415.0" style="-fx-background-color: white;">
                                  <children>
                                     <TextField fx:id="NrRachunku" layoutX="59.0" layoutY="33.0" prefHeight="25.0" prefWidth="274.0" />
-                                    <Button layoutX="349.0" layoutY="86.0" mnemonicParsing="false" text="Button" />
+                                    <Button layoutX="349.0" layoutY="86.0" mnemonicParsing="false" text="Wiecej" />
                                     <Button layoutX="349.0" layoutY="150.0" mnemonicParsing="false" onAction="#InfoSamochody" text="Wiecej" />
                                     <DatePicker fx:id="od" layoutX="60.0" layoutY="206.0" prefHeight="25.0" prefWidth="273.0" />
                                     <DatePicker fx:id="dodata" layoutX="60.0" layoutY="254.0" prefHeight="25.0" prefWidth="273.0" />
@@ -41,8 +42,14 @@
                                     <Text layoutX="58.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Komentarz" />
                                     <TextField fx:id="cena" layoutX="58.0" layoutY="298.0" prefHeight="25.0" prefWidth="277.0" />
                                     <Text layoutX="60.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cena" />
-                                    <ComboBox fx:id="idSamochoduText" editable="true" layoutX="58.0" layoutY="150.0" prefHeight="25.0" prefWidth="275.0" />
+                                    <ComboBox fx:id="idSamochoduText" editable="true" layoutX="58.0" layoutY="150.0" onAction="#WyswietlCene" prefHeight="25.0" prefWidth="275.0" />
                                     <ComboBox fx:id="idKleinta123" editable="true" layoutX="58.0" layoutY="86.0" prefHeight="25.0" prefWidth="276.0" />
+                                    <Button layoutX="349.0" layoutY="33.0" mnemonicParsing="false" onAction="#Wygeneruj" prefHeight="25.0" prefWidth="50.0" text="Generuj">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="58.0" layoutY="450.0" mnemonicParsing="false" onAction="#Dodaj" text="Dodaj" />
                                  </children></Pane>
                            </children>
                         </Pane>

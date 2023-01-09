@@ -6,6 +6,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -24,7 +25,7 @@ import java.util.ResourceBundle;
 public class InfoCarControler implements Initializable {
 
     @FXML
-    private TextField idCena;
+    private TextField idCenaZaDzien;
 
     @FXML
     private TextField idMarka;
@@ -36,16 +37,21 @@ public class InfoCarControler implements Initializable {
     private TextField idNrRejestracji;
 
     @FXML
-    private static TextField idText;
+    private TextField idSamochodu;
+
 
     private static List<Samochody> samochodylist;
 
-
-
-    ObservableList<Samochody> samochodyObservableList = FXCollections.observableArrayList();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+    public void wypisz(){
+        idSamochodu.setText(String.valueOf(samochodylist.get(0).getIdSamochodu()));
+        idNrRejestracji.setText(String.valueOf(samochodylist.get(0).getNrRejestracji()));
+        idModel.setText(String.valueOf(samochodylist.get(0).getModel()));
+        idMarka.setText(String.valueOf(samochodylist.get(0).getMarka()));
+        idCenaZaDzien.setText(String.valueOf(samochodylist.get(0).getCenaZaDzien()));
 
     }
 
@@ -76,5 +82,28 @@ public class InfoCarControler implements Initializable {
     }
 
 
+    public void Edytuj(ActionEvent actionEvent) {
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Samochody.class);
 
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Samochody samochody2 = new Samochody();
+
+        samochody2.setIdSamochodu(Integer.parseInt(idSamochodu.getText()));
+        samochody2.setModel(idModel.getText());
+        samochody2.setMarka(idMarka.getText());
+        samochody2.setNrRejestracji(idNrRejestracji.getText());
+        samochody2.setCenaZaDzien(idCenaZaDzien.getText());
+
+
+        session.update(samochody2);
+        transaction.commit();
+        session.close();
+    }
 }
