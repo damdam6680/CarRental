@@ -4,10 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
+    <list default="true" id="20ca5598-9ffd-4b72-a579-a1a1159ebf90" name="Changes" comment="Wynajem">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/Walidacjia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/InfoKlienciControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/InfoKlienciControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/SamochodyControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/SamochodyControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/WynajemControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/WynajemControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/model/Wynajem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/model/Wynajem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/carrental/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/carrental/infoKlienci.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/infoKlienci.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/carrental/wynajem.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/wynajem.fxml" afterDir="false" />
+
     <list default="true" id="20ca5598-9ffd-4b72-a579-a1a1159ebf90" name="Changes" comment="dodanie samochodow">
       <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +50,7 @@
       </list>
     </option>
   </component>
+
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
@@ -125,6 +139,38 @@
       <option name="presentableId" value="Default" />
       <updated>1671203413146</updated>
     </task>
+
+    <task id="LOCAL-00001" summary="dodanie funkcionalonsci panelu samochod">
+      <created>1673008820017</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1673008820017</updated>
+    </task>
+    <task id="LOCAL-00002" summary="wynajem">
+      <created>1673036409838</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673036409838</updated>
+    </task>
+    <task id="LOCAL-00003" summary="walidacjia">
+      <created>1673195661311</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1673195661311</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Wynajem">
+      <created>1673287419753</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1673287419753</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+
+
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,6 +184,15 @@
       </map>
     </option>
   </component>
+
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="dodanie funkcionalonsci panelu samochod" />
+    <MESSAGE value="wynajem" />
+    <MESSAGE value="walidacjia" />
+    <MESSAGE value="Wynajem" />
+    <option name="LAST_COMMIT_MESSAGE" value="Wynajem" />
+  </component>
+
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -153,6 +208,22 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="9" />
         </breakpoint>
+
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.hibernate.query.SemanticException" package="org.hibernate.query" />
+          <option name="timeStamp" value="10" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/carrental/controler/SamochodyControler.java</url>
+          <line>101</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/carrental/controler/WynajemControler.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+
       </breakpoints>
     </breakpoint-manager>
   </component>

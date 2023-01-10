@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.carrental.controler.InfoKlienciControler"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="521.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.InfoKlienciControler">
+   <children>
+      <TextField fx:id="idKlienciText" layoutX="16.0" layoutY="38.0" prefHeight="25.0" prefWidth="336.0" />
+      <TextField fx:id="idImie" layoutX="17.0" layoutY="88.0" prefHeight="25.0" prefWidth="336.0" />
+      <TextField fx:id="idNazwisko" layoutX="17.0" layoutY="136.0" prefHeight="25.0" prefWidth="336.0" />
+      <TextField fx:id="idPesel" layoutX="16.0" layoutY="185.0" prefHeight="25.0" prefWidth="336.0" />
+      <TextField fx:id="idPrawoJazdy" layoutX="16.0" layoutY="227.0" prefHeight="25.0" prefWidth="336.0" />
+      <TextField fx:id="idTelefon" layoutX="17.0" layoutY="279.0" prefHeight="25.0" prefWidth="336.0" />
+      <TextField fx:id="idAdres" layoutX="16.0" layoutY="329.0" prefHeight="25.0" prefWidth="336.0" />
+      <Text layoutX="17.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="idKlienci " />
+      <Text layoutX="17.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imie" />
+      <Text layoutX="17.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko" />
+      <Text layoutX="17.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pesel" />
+      <Text layoutX="17.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PrawoJazdy" />
+      <Text layoutX="17.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon" />
+      <Text layoutX="17.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adres" />
+   </children>
 </AnchorPane>

@@ -3,7 +3,6 @@ package com.example.carrental.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.*;
 
 @Entity
 @Table(name = "wynajem")
@@ -15,13 +14,13 @@ public class Wynajem {
     @Column(name = "idWynajem")
     private int idWynajem;
 
-    @OneToMany()
-    @JoinColumn(name = "idKlienta")
-    private List<Klienci> klienciList;
+    //@OneToMany()
+    @Column(name = "idKlienci")
+    private int klienciList;
 
-    @OneToMany()
-    @JoinColumn(name = "idSamochodu")
-    private List<Samochody> samochodyList;
+    //@OneToMany()
+    @Column(name = "idSamochodu")
+    private int samochodyList;
 
 
     @Column(name = "NrRachunku")
@@ -50,19 +49,19 @@ public class Wynajem {
         this.idWynajem = idWynajem;
     }
 
-    public List<Klienci> getKlienciList() {
+    public int getKlienciList() {
         return klienciList;
     }
 
-    public void setKlienciList(List<Klienci> klienciList) {
+    public void setKlienciList(int klienciList) {
         this.klienciList = klienciList;
     }
 
-    public List<Samochody> getSamochodyList() {
+    public int getSamochodyList() {
         return samochodyList;
     }
 
-    public void setSamochodyList(List<Samochody> samochodyList) {
+    public void setSamochodyList(int samochodyList) {
         this.samochodyList = samochodyList;
     }
 

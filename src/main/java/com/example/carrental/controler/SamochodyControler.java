@@ -14,7 +14,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -39,6 +38,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
+
+import static com.example.carrental.controler.Walidacjia.*;
 
 public class SamochodyControler implements Initializable {
     @FXML
@@ -187,7 +188,7 @@ public class SamochodyControler implements Initializable {
         samochody2.setCenaZaDzien(CenaText.getText());
         walidacja();
 
-        if(isNrRejestracjiOK(RejestracjiaText.getText()) && isCenaOk(CenaText.getText())) {
+        if(isNrRejestracjiOK(RejestracjiaText.getText()) && isCyfra(CenaText.getText())) {
             session.persist(samochody2);
             transaction.commit();
             session.close();
@@ -221,9 +222,7 @@ public class SamochodyControler implements Initializable {
     public void loadAllData() {
         fetchData();
         samochodyObservableList.removeAll(samochodyObservableList);
-        for (Samochody temp : samochodylist) {
-            samochodyObservableList.add(temp);
-        }
+        samochodyObservableList.addAll(samochodylist);
     }
     public void wyszukiwanie() {
         FilteredList<Samochody> filteredList = new FilteredList<>(samochodyObservableList, e -> true);
@@ -244,11 +243,7 @@ public class SamochodyControler implements Initializable {
                     return true;
                 } else if (predicateKlientData.getCenaZaDzien().toLowerCase().contains(searchKey)) {
                     return true;
-                } else if (String.valueOf(predicateKlientData.getIdSamochodu()).toString().contains(searchKey)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                } else return String.valueOf(predicateKlientData.getIdSamochodu()).toString().contains(searchKey);
             });
             SortedList<Samochody> sortedList = new SortedList<>(filteredList);
 
@@ -257,13 +252,8 @@ public class SamochodyControler implements Initializable {
         });
     }
 
-    private boolean isNrRejestracjiOK(String s){
-        return s.matches("[AZ]{2}([AZ]|[09])[09]{4}") ;
-    }
-    private boolean isCenaOk(String s){
-        return s.matches("-?\\d+(\\.\\d+)?");
-    }
 
+    Walidacjia walidacjia1;
     public void walidacja(){
         if(!isNrRejestracjiOK(RejestracjiaText.getText()) || RejestracjiaText.getText().equals("")){
             NLabel.setVisible(true);
@@ -272,10 +262,10 @@ public class SamochodyControler implements Initializable {
         else if(isNrRejestracjiOK(RejestracjiaText.getText())){
             NLabel.setVisible(false);
         }
-        if(!isCenaOk(CenaText.getText()) || CenaText.getText().equals("")){
+        if(!isCyfra(CenaText.getText()) || CenaText.getText().equals("")){
             Clabel.setVisible(true);
             Clabel.setText("nie podałeś cyfry");
-        }else if(isCenaOk(CenaText.getText())){
+        }else if(isCyfra(CenaText.getText())){
             Clabel.setVisible(false);
         }
     }
