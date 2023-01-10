@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 08 Sty 2023, 21:24
+-- Czas generowania: 10 Sty 2023, 19:55
 -- Wersja serwera: 10.4.25-MariaDB
 -- Wersja PHP: 7.4.30
 
@@ -511,9 +511,9 @@ CREATE TABLE `samochody` (
 --
 
 INSERT INTO `samochody` (`idSamochodu`, `Marka`, `Model`, `NrRejestracji`, `CenaZaDzien`) VALUES
-(1, 'Pontiac', 'Firebird', '1N4CL2AP0AC661609', '36'),
+(1, 'Pontiac', 'Firebird', '1N4CL2AP0AC661609', '37'),
 (2, 'Audi', 'A6', '1C6RD7MT1CS821441', '32'),
-(4, 'Ford', 'Mustang', '1N6AA0CC5BN107250', '80'),
+(4, 'Ford', 'Mustang', '1N6AA0CC5BN107250', '85'),
 (5, 'Ford', 'Mustang', 'JN1CV6AP8CM666228', '34'),
 (6, 'Chevrolet', 'Equinox', '1D4RD4GG1BC707618', '57'),
 (7, 'Dodge', 'Ram Van 1500', '5FPYK1F56EB172541', '46'),
@@ -1527,8 +1527,8 @@ INSERT INTO `samochody` (`idSamochodu`, `Marka`, `Model`, `NrRejestracji`, `Cena
 
 CREATE TABLE `wynajem` (
   `idWynajem` int(11) NOT NULL,
-  `idKlienci` int(11) NOT NULL,
-  `idSamochodu` int(11) NOT NULL,
+  `idKlienci` int(11) DEFAULT NULL,
+  `idSamochodu` int(11) DEFAULT NULL,
   `NrRachunku` varchar(255) NOT NULL,
   `Cena` decimal(2,0) NOT NULL,
   `Od` date NOT NULL,
@@ -1541,7 +1541,17 @@ CREATE TABLE `wynajem` (
 --
 
 INSERT INTO `wynajem` (`idWynajem`, `idKlienci`, `idSamochodu`, `NrRachunku`, `Cena`, `Od`, `Do`, `Komentarz`) VALUES
-(1, 62, 8, '123', '99', '2023-01-06', '2023-01-07', '123');
+(1, 62, 8, '123', '99', '2023-01-06', '2023-01-07', '123'),
+(2, NULL, 9, 'KCSGRHLGFJC', '81', '2023-01-10', '2023-01-27', ''),
+(3, 6, 7, 'CLSTEXZNMYS', '46', '2023-01-10', '2023-01-19', ''),
+(4, 9, 7, 'KBKPDPOGOVONMXNE', '46', '2023-01-10', '2023-01-27', ''),
+(5, 7, 5, 'BYWLTUJYBUPKYGZA', '34', '2023-01-26', '2023-01-10', ''),
+(6, 6, 10, 'XRXTNYNISBZIZLGQ', '74', '2023-01-10', '2023-01-21', ''),
+(7, 9, 4, 'LBUJFWKJDTBNVCDO', '85', '2023-01-05', '2023-01-21', ''),
+(8, 6, 9, 'XRNSDARDTECXOTAU', '81', '2023-01-10', '2023-01-26', ''),
+(9, 10, 2, 'NSVDFKNVCRZLLIGN', '32', '2023-01-10', '2023-01-09', ''),
+(10, 10, 2, 'NSVDFKNVCRZLLIGN', '32', '2023-01-10', '2023-01-25', ''),
+(11, 5, 7, 'YCVTRBSDTQTTRAPJ', '46', '2023-01-10', '2023-01-09', '');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -1587,7 +1597,7 @@ ALTER TABLE `samochody`
 -- AUTO_INCREMENT dla tabeli `wynajem`
 --
 ALTER TABLE `wynajem`
-  MODIFY `idWynajem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idWynajem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Ograniczenia dla zrzutów tabel
