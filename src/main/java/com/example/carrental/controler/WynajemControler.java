@@ -1,11 +1,7 @@
 package com.example.carrental.controler;
-
 import com.example.carrental.model.Klienci;
 import com.example.carrental.model.Samochody;
-
-
 import com.example.carrental.model.Wynajem;
-import com.example.carrental.util.HibernateUtil;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -25,11 +21,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-
-
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.*;
+
+import static com.example.carrental.controler.Walidacjia.*;
+
 
 public class WynajemControler implements Initializable {
 
@@ -54,10 +50,28 @@ public class WynajemControler implements Initializable {
     @FXML
     private DatePicker od;
 
+    @FXML
+    private Label CenaError;
+
+    @FXML
+    private Label NrRachunkuLabel;
+    @FXML
+    private Label doLabel;
+    @FXML
+    private Label idKlentaLabel;
+
+    @FXML
+    private Label idSamochoduLabel;
+
+
+    @FXML
+    private Label odLabel;
+
     private List<Samochody> samochodylist;
     private List<Klienci> KlienciList;
 
 
+    boolean walidaciabool = false;
 
 
     ObservableList<Samochody> samochodyObservableList = FXCollections.observableArrayList();
@@ -125,7 +139,7 @@ public class WynajemControler implements Initializable {
             URL fxmlLocation = getClass().getResource("/com/example/carrental/infoCar.fxml");
             System.out.println(fxmlLocation);
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-            Parent root = (Parent) fxmlLoader.load();
+            Parent root = fxmlLoader.load();
             Stage stage = new Stage();
 
             InfoCarControler infoCarControler = fxmlLoader.getController();
@@ -161,7 +175,7 @@ public class WynajemControler implements Initializable {
     }
 
     public void Wygeneruj(ActionEvent actionEvent) {
-        String generatedString = RandomStringUtils.randomAlphabetic(11).toUpperCase(Locale.ROOT);
+        String generatedString = RandomStringUtils.randomAlphabetic(16).toUpperCase(Locale.ROOT);
 
         NrRachunku.setText(generatedString);
     }
@@ -179,17 +193,112 @@ public class WynajemControler implements Initializable {
 
         Wynajem wynajem = new Wynajem();
 
-       // wynajem.setIdWynajem(Integer.parseInt(NrRachunku.getText()));
-        wynajem.setCena(Double.parseDouble(cena.getText()));
-        wynajem.setDo(dodata.getValue());
-        wynajem.setOd(od.getValue());
-       // wynajem.setKlienciList(idKleinta123.getValue().toString());
-        //wynajem.setSamochodyList(idSamochoduText.getValue().toString());
-        wynajem.setKomentarz(komentarz.getText());
+        walidacja();
+
+        if (walidaciabool){
+            wynajem.setNrRachunku(NrRachunku.getText());
+            wynajem.setCena(Double.parseDouble(cena.getText()));
+            wynajem.setDo(dodata.getValue());
+            wynajem.setOd(od.getValue());
+            wynajem.setKlienciList(Integer.parseInt(String.valueOf(idKleinta123.getValue())));
+            wynajem.setSamochodyList(Integer.parseInt(String.valueOf(idSamochoduText.getValue())));
+            wynajem.setKomentarz(komentarz.getText());
+            session.persist(wynajem);
+            transaction.commit();
+            session.close();
+        }
+
+    }
+
+    public void wiecejOpen(ActionEvent actionEvent) {
+        try {
+            URL fxmlLocation = getClass().getResource("/com/example/carrental/infoKlienci.fxml");
+            System.out.println(fxmlLocation);
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+
+           InfoKlienciControler infoKlienciControler = fxmlLoader.getController();
+
+             System.out.println(idKleinta123.getValue());
+
+            infoKlienciControler.fetchData(String.valueOf(idKleinta123.getValue()));
+            infoKlienciControler.wypisz();
+            stage.setTitle("Info");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void walidacja(){
+        if(!isCyfra(cena.getText()) || cena.getText().equals("")){
+            CenaError.setVisible(true);
+            CenaError.setText("nie podałeś cyfry");
+
+            walidaciabool = false;
+        }else if(isCyfra(cena.getText())){
+            CenaError.setVisible(false);
+            walidaciabool = true;
+        }
+        if (NrRachunku.getText().equals("")){
+            NrRachunkuLabel.setVisible(true);
+            NrRachunkuLabel.setText("nie może być puste");
+            walidaciabool = false;
+        }else {
+            NrRachunkuLabel.setVisible(false);
+            walidaciabool = true;
+        }
+        if(idKleinta123.getValue() == null){
+            idKlentaLabel.setVisible(true);
+            idKlentaLabel.setText("nie może być puste");
+            walidaciabool = false;
+        }else {
+            idKlentaLabel.setVisible(false);
+            walidaciabool =true;
+        }
+        if(idSamochoduText.getValue() == null){
+            idSamochoduLabel.setVisible(true);
+            idSamochoduLabel.setText("nie może być puste");
+            walidaciabool = false;
+        }else {
+            idSamochoduLabel.setVisible(false);
+            walidaciabool =true;
+        }
+        if(dodata.getValue() == null){
+            doLabel.setVisible(true);
+            doLabel.setText("nie może być puste");
+            walidaciabool = false;
+        }else {
+            doLabel.setVisible(false);
+            walidaciabool = true;
+        }
+        if(od.getValue() == null){
+            odLabel.setVisible(true);
+            odLabel.setText("nie może być puste");
+            walidaciabool = false;
+        }else {
+            odLabel.setVisible(false);
+            walidaciabool = true;
+        }
+        if (isOdWieksza(dodata.getValue(),od.getValue())){
+            doLabel.setVisible(true);
+            doLabel.setText("nie mozna ustawic do daty do wieszesz niez od ");
+            walidaciabool = false;
+        }else{
+            doLabel.setVisible(false);
+            walidaciabool = true;
+        }
+        if (isPrzeszlosc(dodata.getValue(),od.getValue())){
+            odLabel.setVisible(true);
+            odLabel.setText("nie mozna rezerowac w przeszlosc ");
+            walidaciabool = false;
+        }else{
+            odLabel.setVisible(false);
+            walidaciabool = true;
+        }
 
 
-        session.persist(wynajem);
-        transaction.commit();
-        session.close();
     }
 }
