@@ -84,8 +84,6 @@ public class SamochodyControler implements Initializable {
     @FXML
     private TextField SaearchBar;
 
-    private  Samochody samochody;
-
     private List<Samochody> samochodylist;
 
 
@@ -122,9 +120,7 @@ public class SamochodyControler implements Initializable {
         nrRejestracji.setCellValueFactory(new PropertyValueFactory<Samochody, String>("NrRejestracji"));
         cena.setCellValueFactory(new PropertyValueFactory<Samochody, String>("CenaZaDzien"));
         fetchData();
-        for (Samochody temp : samochodylist) {
-            samochodyObservableList.add(temp);
-        }
+        samochodyObservableList.addAll(samochodylist);
         tabela.setItems(samochodyObservableList);
 
     }
@@ -252,8 +248,6 @@ public class SamochodyControler implements Initializable {
         });
     }
 
-
-    Walidacjia walidacjia1;
     public void walidacja(){
         if(!isNrRejestracjiOK(RejestracjiaText.getText()) || RejestracjiaText.getText().equals("")){
             NLabel.setVisible(true);

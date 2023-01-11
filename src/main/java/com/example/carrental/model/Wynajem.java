@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "wynajem")
-@Embeddable
 public class Wynajem {
 //TODO NAPRAWIC Klienci LIst i Samochody list i czas
     @Id
