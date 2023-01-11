@@ -1,4 +1,5 @@
 package com.example.carrental.controler;
+
 import com.example.carrental.model.Klienci;
 import com.example.carrental.model.Samochody;
 import com.example.carrental.model.Wynajem;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.Session;
@@ -21,7 +23,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
 import java.net.URL;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import static com.example.carrental.controler.Walidacjia.*;
@@ -62,42 +68,80 @@ public class WynajemControler implements Initializable {
 
     @FXML
     private Label idSamochoduLabel;
-
-
     @FXML
     private Label odLabel;
+
+
+    //Tablica
+    @FXML
+    private TableColumn<Wynajem, String> NrRachunkutab;
+    @FXML
+    private TableColumn<Wynajem, Double> cenatab;
+    @FXML
+    private TableColumn<Wynajem, LocalDate> dotab;
+    @FXML
+    private TableColumn<Wynajem, Integer> idKliencitab;
+    @FXML
+    private TableColumn<Wynajem, Integer> idSamochodutab;
+    @FXML
+    private TableColumn<Wynajem, Integer> idWynajemtab;
+    @FXML
+    private TableColumn<Wynajem, String> komentarztab;
+    @FXML
+    private TableColumn<Wynajem, LocalDate> odtab;
+    @FXML
+    private TableView<Wynajem> tablica;
+
 
     private List<Samochody> samochodylist;
     private List<Klienci> KlienciList;
 
-
+    private List<Wynajem> wynajemList;
+    static String cena1;
     boolean walidaciabool = false;
 
 
-    ObservableList<Samochody> samochodyObservableList = FXCollections.observableArrayList();
+    ObservableList<Wynajem> samochodyObservableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            fetchDataCar();
-            fetchDataKlient();
 
-            idSamochoduText.getItems().setAll(samochodylist);
-            idKleinta123.getItems().setAll(KlienciList);
+
+        idWynajemtab.setCellValueFactory(new PropertyValueFactory<Wynajem, Integer>("idWynajem"));
+        idKliencitab.setCellValueFactory(new PropertyValueFactory<Wynajem, Integer>("klienciList"));
+        idSamochodutab.setCellValueFactory(new PropertyValueFactory<Wynajem, Integer>("samochodyList"));
+        NrRachunkutab.setCellValueFactory(new PropertyValueFactory<Wynajem, String>("NrRachunku"));
+        cenatab.setCellValueFactory(new PropertyValueFactory<Wynajem, Double>("Cena"));
+        odtab.setCellValueFactory(new PropertyValueFactory<Wynajem, LocalDate>("Do"));
+        dotab.setCellValueFactory(new PropertyValueFactory<Wynajem, LocalDate>("Od"));
+        komentarztab.setCellValueFactory(new PropertyValueFactory<Wynajem, String>("Komentarz"));
+        fetchAllData();
+        samochodyObservableList.addAll(wynajemList);
+
+
+        tablica.setItems(samochodyObservableList);
+
+        idSamochoduText.getItems().setAll(samochodylist);
+        idKleinta123.getItems().setAll(KlienciList);
 
     }
 
-    public void fetchDataCar() {
+    public void fetchAllData() {
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Samochody.class);
-
+        config.addAnnotatedClass(Klienci.class);
+        config.addAnnotatedClass(Wynajem.class);
         StandardServiceRegistryBuilder builder =
                 new StandardServiceRegistryBuilder().applySettings(config.getProperties());
         SessionFactory factory = config.buildSessionFactory(builder.build());
 
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
+        KlienciList = loadAllDataKlienta(Klienci.class, session);
         samochodylist = loadAllDataCar(Samochody.class, session);
+        wynajemList = loadAllWynajemKlienta(Wynajem.class, session);
         System.out.println(Arrays.toString(samochodylist.toArray()));
+        System.out.println(Arrays.toString(wynajemList.toArray()));
         transaction.commit();
         session.close();
     }
@@ -106,23 +150,7 @@ public class WynajemControler implements Initializable {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
         criteria.from(type);
-        List<T> data = session.createQuery("select idSamochodu from Samochody").getResultList();
-        return data;
-    }
-    public void fetchDataKlient() {
-        Configuration config = new Configuration().configure();
-        config.addAnnotatedClass(Klienci.class);
-
-        StandardServiceRegistryBuilder builder =
-                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
-        SessionFactory factory = config.buildSessionFactory(builder.build());
-
-        Session session = factory.openSession();
-        Transaction transaction = session.beginTransaction();
-        KlienciList = loadAllDataKlienta(Klienci.class, session);
-        System.out.println(Arrays.toString(KlienciList.toArray()));
-        transaction.commit();
-        session.close();
+        return (List<T>) session.createQuery("select idSamochodu from Samochody").getResultList();
     }
 
     private static <T> List<T> loadAllDataKlienta(Class<T> type, Session session) {
@@ -130,6 +158,14 @@ public class WynajemControler implements Initializable {
         CriteriaQuery<T> criteria = builder.createQuery(type);
         criteria.from(type);
         List<T> data = session.createQuery("select idKlienci  from Klienci").getResultList();
+        return data;
+    }
+
+    private static <T> List<T> loadAllWynajemKlienta(Class<T> type, Session session) {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery(type);
+        criteria.from(type);
+        List<T> data = session.createQuery(criteria).getResultList();
         return data;
     }
 
@@ -141,17 +177,14 @@ public class WynajemControler implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
-
             InfoCarControler infoCarControler = fxmlLoader.getController();
-
             System.out.println(idSamochoduText.getValue());
-
             infoCarControler.fetchData(String.valueOf(idSamochoduText.getValue()));
             infoCarControler.wypisz();
             stage.setTitle("Info");
             stage.setScene(new Scene(root));
             stage.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -159,19 +192,17 @@ public class WynajemControler implements Initializable {
     public void WyswietlCene(ActionEvent actionEvent) {
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Samochody.class);
-
         StandardServiceRegistryBuilder builder =
                 new StandardServiceRegistryBuilder().applySettings(config.getProperties());
         SessionFactory factory = config.buildSessionFactory(builder.build());
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("select CenaZaDzien from Samochody WHERE idSamochodu = :id");
-        query.setParameter("id",idSamochoduText.getValue());
-        String cena1 = query.getSingleResult().toString();
-        cena.setText(cena1);
+        Query query = session.createQuery("Select CenaZaDzien from Samochody WHERE idSamochodu = :id");
+        query.setParameter("id", idSamochoduText.getValue());
+        cena1 = query.getSingleResult().toString();
+        Oblicz();
         transaction.commit();
         session.close();
-
     }
 
     public void Wygeneruj(ActionEvent actionEvent) {
@@ -195,7 +226,7 @@ public class WynajemControler implements Initializable {
 
         walidacja();
 
-        if (walidaciabool){
+        if(isCyfra(cena.getText()) && !cena.getText().isEmpty() && idKleinta123.getValue() != null && idSamochoduText.getValue() != null && dodata.getValue() != null && od.getValue() != null && !isOdWieksza(dodata.getValue(), od.getValue()) && !isPrzeszlosc(dodata.getValue(), od.getValue())) {
             wynajem.setNrRachunku(NrRachunku.getText());
             wynajem.setCena(Double.parseDouble(cena.getText()));
             wynajem.setDo(dodata.getValue());
@@ -207,8 +238,8 @@ public class WynajemControler implements Initializable {
             transaction.commit();
             session.close();
         }
-
     }
+
 
     public void wiecejOpen(ActionEvent actionEvent) {
         try {
@@ -218,87 +249,89 @@ public class WynajemControler implements Initializable {
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
 
-           InfoKlienciControler infoKlienciControler = fxmlLoader.getController();
+            InfoKlienciControler infoKlienciControler = fxmlLoader.getController();
 
-             System.out.println(idKleinta123.getValue());
+            System.out.println(idKleinta123.getValue());
 
             infoKlienciControler.fetchData(String.valueOf(idKleinta123.getValue()));
             infoKlienciControler.wypisz();
             stage.setTitle("Info");
             stage.setScene(new Scene(root));
             stage.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void walidacja(){
-        if(!isCyfra(cena.getText()) || cena.getText().equals("")){
+    public void walidacja() {
+        if (!isCyfra(cena.getText()) || cena.getText().equals("")) {
             CenaError.setVisible(true);
             CenaError.setText("nie podałeś cyfry");
 
-            walidaciabool = false;
-        }else if(isCyfra(cena.getText())){
+        } else if (isCyfra(cena.getText())) {
             CenaError.setVisible(false);
-            walidaciabool = true;
+
         }
-        if (NrRachunku.getText().equals("")){
+        if (NrRachunku.getText().equals("")) {
             NrRachunkuLabel.setVisible(true);
             NrRachunkuLabel.setText("nie może być puste");
-            walidaciabool = false;
-        }else {
+        } else {
             NrRachunkuLabel.setVisible(false);
-            walidaciabool = true;
+
         }
-        if(idKleinta123.getValue() == null){
+        if (idKleinta123.getValue() == null) {
             idKlentaLabel.setVisible(true);
             idKlentaLabel.setText("nie może być puste");
-            walidaciabool = false;
-        }else {
+        } else {
             idKlentaLabel.setVisible(false);
-            walidaciabool =true;
+
         }
-        if(idSamochoduText.getValue() == null){
+        if (idSamochoduText.getValue() == null) {
             idSamochoduLabel.setVisible(true);
             idSamochoduLabel.setText("nie może być puste");
-            walidaciabool = false;
-        }else {
+        } else {
             idSamochoduLabel.setVisible(false);
-            walidaciabool =true;
+
         }
-        if(dodata.getValue() == null){
+        if (dodata.getValue() == null) {
             doLabel.setVisible(true);
             doLabel.setText("nie może być puste");
-            walidaciabool = false;
-        }else {
+        } else {
             doLabel.setVisible(false);
-            walidaciabool = true;
+
         }
-        if(od.getValue() == null){
+        if (od.getValue() == null) {
             odLabel.setVisible(true);
             odLabel.setText("nie może być puste");
-            walidaciabool = false;
-        }else {
+        } else {
             odLabel.setVisible(false);
-            walidaciabool = true;
+
         }
-        if (isOdWieksza(dodata.getValue(),od.getValue())){
+        if (isOdWieksza(dodata.getValue(), od.getValue())) {
             doLabel.setVisible(true);
             doLabel.setText("nie mozna ustawic do daty do wieszesz niez od ");
             walidaciabool = false;
-        }else{
+        } else {
             doLabel.setVisible(false);
-            walidaciabool = true;
         }
-        if (isPrzeszlosc(dodata.getValue(),od.getValue())){
+        if (isPrzeszlosc(dodata.getValue(), od.getValue())) {
             odLabel.setVisible(true);
             odLabel.setText("nie mozna rezerowac w przeszlosc ");
-            walidaciabool = false;
-        }else{
+        } else {
             odLabel.setVisible(false);
-            walidaciabool = true;
         }
 
 
     }
+
+
+    public void Oblicz() {
+        int liczbadni = 0;
+        if (od.getValue() != null && dodata.getValue() != null) {
+            liczbadni = (int) ChronoUnit.DAYS.between(od.getValue(), dodata.getValue());
+        }
+        cena.setText(String.valueOf(liczbadni * Integer.parseInt(cena1)));
+    }
+
+
 }
