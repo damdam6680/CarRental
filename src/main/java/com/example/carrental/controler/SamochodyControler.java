@@ -1,6 +1,4 @@
 package com.example.carrental.controler;
-
-
 import com.example.carrental.model.Samochody;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -151,11 +149,12 @@ public class SamochodyControler implements Initializable {
         samochody2.setMarka(MarkaText.getText());
         samochody2.setNrRejestracji(RejestracjiaText.getText());
         samochody2.setCenaZaDzien(CenaText.getText());
-
-
-        session.update(samochody2);
-        transaction.commit();
-        session.close();
+        walidacja();
+        if(isNrRejestracjiOK(RejestracjiaText.getText()) && isCyfra(CenaText.getText())) {
+            session.update(samochody2);
+            transaction.commit();
+            session.close();
+        }
     }
     public void wyczysc() {
         idText.setText("");
@@ -177,7 +176,6 @@ public class SamochodyControler implements Initializable {
 
         Samochody samochody2 = new Samochody();
 
-        //samochody2.setIdSamochodu(Integer.parseInt(idText.getText()));
         samochody2.setModel(ModelText.getText());
         samochody2.setMarka(MarkaText.getText());
         samochody2.setNrRejestracji(RejestracjiaText.getText());
