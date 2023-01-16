@@ -4,22 +4,26 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+
+
+
+
+
 @Entity
 @Table(name = "wynajem")
 public class Wynajem {
-//TODO NAPRAWIC Klienci LIst i Samochody list i czas
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idWynajem")
     private int idWynajem;
 
-    //@OneToMany()
+    //@ManyToOne
     @Column(name = "idKlienci")
-    private int klienciList;
+    Integer klienciList;
 
-    //@OneToMany()
+    //@ManyToOne()
     @Column(name = "idSamochodu")
-    private int samochodyList;
+    Integer samochodyList;
 
 
     @Column(name = "NrRachunku")
@@ -48,19 +52,19 @@ public class Wynajem {
         this.idWynajem = idWynajem;
     }
 
-    public int getKlienciList() {
+    public Integer getKlienciList() {
         return klienciList;
     }
 
-    public void setKlienciList(int klienciList) {
+    public void setKlienciList(Integer klienciList) {
         this.klienciList = klienciList;
     }
 
-    public int getSamochodyList() {
+    public Integer getSamochodyList() {
         return samochodyList;
     }
 
-    public void setSamochodyList(int samochodyList) {
+    public void setSamochodyList(Integer samochodyList) {
         this.samochodyList = samochodyList;
     }
 

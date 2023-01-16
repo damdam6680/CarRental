@@ -64,12 +64,16 @@
                      <center>
                         <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <TableView prefHeight="610.0" prefWidth="472.0">
-                                <columns>
-                                  <TableColumn prefWidth="230.0" text="C1" />
-                                  <TableColumn prefWidth="241.0" text="C2" />
-                                </columns>
-                              </TableView>
+                              <TextArea fx:id="tx" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="553.0" prefWidth="200.0" style="-fx-border-color: green;">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextArea>
+                              <TextArea fx:id="tx1" editable="false" layoutX="245.0" layoutY="13.0" prefHeight="555.0" prefWidth="200.0" style="-fx-border-color: red;">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextArea>
                            </children>
                         </Pane>
                      </center>
@@ -80,7 +84,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tablica" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tablica" onMouseClicked="#wybrane" prefHeight="570.0" prefWidth="540.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="idWynajemtab" prefWidth="75.0" text="idWynajem " />
                             <TableColumn fx:id="idKliencitab" prefWidth="75.0" text="idKlienci " />
@@ -96,14 +100,14 @@
                      <left>
                         <Pane prefHeight="611.0" prefWidth="337.0" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="309.0" />
-                              <TextField layoutX="14.0" layoutY="107.0" prefHeight="25.0" prefWidth="309.0" />
-                              <TextField layoutX="14.0" layoutY="151.0" prefHeight="25.0" prefWidth="309.0" />
-                              <TextField layoutX="14.0" layoutY="197.0" prefHeight="25.0" prefWidth="309.0" />
-                              <TextField layoutX="14.0" layoutY="248.0" prefHeight="25.0" prefWidth="309.0" />
-                              <TextField layoutX="14.0" layoutY="293.0" prefHeight="25.0" prefWidth="309.0" />
-                              <TextField layoutX="14.0" layoutY="343.0" prefHeight="25.0" prefWidth="309.0" />
-                              <TextField layoutX="14.0" layoutY="391.0" prefHeight="25.0" prefWidth="309.0" />
+                              <TextField fx:id="idWynajemText" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="309.0" />
+                              <TextField fx:id="idKlenciText" layoutX="14.0" layoutY="107.0" prefHeight="25.0" prefWidth="309.0" />
+                              <TextField fx:id="idSamochoduid" layoutX="14.0" layoutY="151.0" prefHeight="25.0" prefWidth="309.0" />
+                              <TextField fx:id="NrRachunkuText" layoutX="14.0" layoutY="197.0" prefHeight="25.0" prefWidth="309.0" />
+                              <TextField fx:id="CenaText" layoutX="14.0" layoutY="248.0" prefHeight="25.0" prefWidth="309.0" />
+                              <TextField fx:id="odText" layoutX="14.0" layoutY="293.0" prefHeight="25.0" prefWidth="309.0" />
+                              <TextField fx:id="doText" layoutX="14.0" layoutY="343.0" prefHeight="25.0" prefWidth="309.0" />
+                              <TextField fx:id="KomentarzText" layoutX="14.0" layoutY="391.0" prefHeight="25.0" prefWidth="309.0" />
                               <Text layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="idWynajem" />
                               <Text layoutX="14.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="idKlenci" />
                               <Text layoutX="14.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="idSamochodu" />
@@ -112,8 +116,10 @@
                               <Text layoutX="14.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="od" />
                               <Text layoutX="14.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="do" />
                               <Text layoutX="14.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Komentarz" />
-                              <Button layoutX="14.0" layoutY="433.0" mnemonicParsing="false" text="Edytuj" />
+                              <Button fx:id="editData1" layoutX="14.0" layoutY="433.0" mnemonicParsing="false" onAction="#editData" text="Edytuj" />
                               <Button layoutX="72.0" layoutY="433.0" mnemonicParsing="false" text="Usun" />
+                              <TextField fx:id="szukaj" layoutX="52.0" layoutY="14.0" prefHeight="25.0" prefWidth="273.0" />
+                              <Text layoutX="11.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Szukaj" />
                            </children></Pane>
                      </left>
                   </BorderPane>

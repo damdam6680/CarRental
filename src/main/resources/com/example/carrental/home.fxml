@@ -1,23 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.model.Home">
+<AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.HomeControler">
    <children>
-      <Pane layoutX="109.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: limegreen;" />
-      <Pane layoutX="360.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: deepskyblue;" />
-      <Pane layoutX="609.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: red;" />
-      <BarChart layoutX="110.0" layoutY="182.0" prefHeight="400.0" prefWidth="707.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
+      <Pane layoutX="109.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: limegreen;">
+         <children>
+            <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liczba Klientów" wrappingWidth="84.13671875">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="liczba" layoutX="100.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children></Pane>
+      <Pane layoutX="360.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: deepskyblue;">
+         <children>
+            <Text layoutX="7.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Liczba Samochodów" wrappingWidth="103.13671875">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="liczba1" layoutX="110.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children></Pane>
+      <Pane layoutX="609.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: red;">
+         <children>
+            <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Liczba Taransakcji" wrappingWidth="103.13671875">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="liczba11" layoutX="117.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children></Pane>
    </children>
 </AnchorPane>

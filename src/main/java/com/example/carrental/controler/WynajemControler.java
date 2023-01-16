@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.Session;
@@ -25,7 +26,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import java.net.URL;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -71,6 +71,10 @@ public class WynajemControler implements Initializable {
     @FXML
     private Label odLabel;
 
+    @FXML
+    private TextArea tx;
+    @FXML
+    private TextArea tx1;
 
     //Tablica
     @FXML
@@ -92,21 +96,51 @@ public class WynajemControler implements Initializable {
     @FXML
     private TableView<Wynajem> tablica;
 
+    //TexFild Tablicy
+    @FXML
+    private TextField CenaText;
+
+    @FXML
+    private TextField KomentarzText;
+
+    @FXML
+    private TextField NrRachunkuText;
+
+    @FXML
+    private TextField doText;
+
+    @FXML
+    private TextField odText;
+
+    @FXML
+    private TextField idKlenciText;
+
+    @FXML
+    private TextField idSamochoduid;
+
+    @FXML
+    private TextField idWynajemText;
+
+    @FXML
+    private TextField szukaj;
+
+
 
     private List<Samochody> samochodylist;
     private List<Klienci> KlienciList;
 
     private List<Wynajem> wynajemList;
+
     static String cena1;
     boolean walidaciabool = false;
 
 
     ObservableList<Wynajem> samochodyObservableList = FXCollections.observableArrayList();
 
+    ObservableList<Wynajem> DatayObseravbleList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         idWynajemtab.setCellValueFactory(new PropertyValueFactory<Wynajem, Integer>("idWynajem"));
         idKliencitab.setCellValueFactory(new PropertyValueFactory<Wynajem, Integer>("klienciList"));
         idSamochodutab.setCellValueFactory(new PropertyValueFactory<Wynajem, Integer>("samochodyList"));
@@ -117,7 +151,6 @@ public class WynajemControler implements Initializable {
         komentarztab.setCellValueFactory(new PropertyValueFactory<Wynajem, String>("Komentarz"));
         fetchAllData();
         samochodyObservableList.addAll(wynajemList);
-
 
         tablica.setItems(samochodyObservableList);
 
@@ -169,40 +202,47 @@ public class WynajemControler implements Initializable {
         return data;
     }
 
-
     public void InfoSamochody(ActionEvent actionEvent) {
-        try {
-            URL fxmlLocation = getClass().getResource("/com/example/carrental/infoCar.fxml");
-            System.out.println(fxmlLocation);
-            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
-            InfoCarControler infoCarControler = fxmlLoader.getController();
-            System.out.println(idSamochoduText.getValue());
-            infoCarControler.fetchData(String.valueOf(idSamochoduText.getValue()));
-            infoCarControler.wypisz();
-            stage.setTitle("Info");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            System.out.println(e);
+        if(idSamochoduText.getValue() != null) {
+            try {
+                URL fxmlLocation = getClass().getResource("/com/example/carrental/infoCar.fxml");
+                System.out.println(fxmlLocation);
+                FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                InfoCarControler infoCarControler = fxmlLoader.getController();
+                System.out.println(idSamochoduText.getValue());
+                infoCarControler.fetchData(String.valueOf(idSamochoduText.getValue()));
+                infoCarControler.wypisz();
+                stage.setTitle("Info");
+                stage.setScene(new Scene(root));
+                stage.show();
+                idSamochoduLabel.setVisible(false);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }else {
+            idSamochoduLabel.setVisible(true);
+            idSamochoduLabel.setText("nie moze byc puste");
         }
     }
 
     public void WyswietlCene(ActionEvent actionEvent) {
-        Configuration config = new Configuration().configure();
-        config.addAnnotatedClass(Samochody.class);
-        StandardServiceRegistryBuilder builder =
-                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
-        SessionFactory factory = config.buildSessionFactory(builder.build());
-        Session session = factory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("Select CenaZaDzien from Samochody WHERE idSamochodu = :id");
-        query.setParameter("id", idSamochoduText.getValue());
-        cena1 = query.getSingleResult().toString();
-        Oblicz();
-        transaction.commit();
-        session.close();
+            Configuration config = new Configuration().configure();
+            config.addAnnotatedClass(Samochody.class);
+            StandardServiceRegistryBuilder builder =
+                    new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+            SessionFactory factory = config.buildSessionFactory(builder.build());
+            Session session = factory.openSession();
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("Select CenaZaDzien from Samochody WHERE idSamochodu = :id");
+            query.setParameter("id", idSamochoduText.getValue());
+            cena1 = query.getSingleResult().toString();
+            Oblicz();
+            transaction.commit();
+            session.close();
+            WyswietlDate();
+
     }
 
     public void Wygeneruj(ActionEvent actionEvent) {
@@ -225,42 +265,50 @@ public class WynajemControler implements Initializable {
         Wynajem wynajem = new Wynajem();
 
         walidacja();
-
-        if(isCyfra(cena.getText()) && !cena.getText().isEmpty() && idKleinta123.getValue() != null && idSamochoduText.getValue() != null && dodata.getValue() != null && od.getValue() != null && !isOdWieksza(dodata.getValue(), od.getValue()) && !isPrzeszlosc(dodata.getValue(), od.getValue())) {
+        SprawdzicCzyNieKoliduje();
+        if (isCyfra(cena.getText()) && !cena.getText().isEmpty() && idKleinta123.getValue() != null && idSamochoduText.getValue() != null && dodata.getValue() != null && od.getValue() != null && !isOdWieksza(dodata.getValue(), od.getValue()) && !isPrzeszlosc(dodata.getValue(), od.getValue()) && !Objects.equals(NrRachunku.getText(), "") && walidaciabool == true) {
             wynajem.setNrRachunku(NrRachunku.getText());
             wynajem.setCena(Double.parseDouble(cena.getText()));
             wynajem.setDo(dodata.getValue());
             wynajem.setOd(od.getValue());
-            wynajem.setKlienciList(Integer.parseInt(String.valueOf(idKleinta123.getValue())));
-            wynajem.setSamochodyList(Integer.parseInt(String.valueOf(idSamochoduText.getValue())));
+            wynajem.setKlienciList(Integer.valueOf(String.valueOf(idKleinta123.getValue())));
+            wynajem.setSamochodyList(Integer.valueOf(String.valueOf(idSamochoduText.getValue())));
             wynajem.setKomentarz(komentarz.getText());
             session.persist(wynajem);
             transaction.commit();
-            session.close();
+
         }
+        session.close();
     }
 
 
     public void wiecejOpen(ActionEvent actionEvent) {
-        try {
-            URL fxmlLocation = getClass().getResource("/com/example/carrental/infoKlienci.fxml");
-            System.out.println(fxmlLocation);
-            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
+        if(idKleinta123.getValue() != null) {
+            try {
+                URL fxmlLocation = getClass().getResource("/com/example/carrental/infoKlienci.fxml");
+                System.out.println(fxmlLocation);
+                FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
 
-            InfoKlienciControler infoKlienciControler = fxmlLoader.getController();
+                InfoKlienciControler infoKlienciControler = fxmlLoader.getController();
 
-            System.out.println(idKleinta123.getValue());
+                System.out.println(idKleinta123.getValue());
 
-            infoKlienciControler.fetchData(String.valueOf(idKleinta123.getValue()));
-            infoKlienciControler.wypisz();
-            stage.setTitle("Info");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            System.out.println(e);
+                infoKlienciControler.fetchData(String.valueOf(idKleinta123.getValue()));
+                infoKlienciControler.wypisz();
+                stage.setTitle("Info");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            idKlentaLabel.setVisible(false);
+        }else {
+            idKlentaLabel.setVisible(true);
+            idKlentaLabel.setText("nie moze byc puste");
         }
+
     }
 
     public void walidacja() {
@@ -333,5 +381,107 @@ public class WynajemControler implements Initializable {
         cena.setText(String.valueOf(liczbadni * Integer.parseInt(cena1)));
     }
 
+    public void WyswietlDate() {
 
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Wynajem.class);
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        List allpatients;
+        Query q1 = session.createQuery("Select Od, Do from Wynajem WHERE samochodyList =:id");
+        q1.setParameter("id", idSamochoduText.getValue());
+        String datay = "";
+        String dotay = "";
+        allpatients=  ((org.hibernate.query.Query<?>) q1).list();
+        for (Iterator it = allpatients.iterator(); it.hasNext(); ) {
+            Object[] myResult = (Object[]) it.next();
+            LocalDate od = (LocalDate) myResult[0];
+            LocalDate Do = (LocalDate) myResult[1];
+            datay += od + "\n";
+            dotay += Do + "\n";
+        }
+
+        tx.setText(datay);
+        tx1.setText(dotay);
+        transaction.commit();
+        session.close();
+
+
+    }
+    public void SprawdzicCzyNieKoliduje(){
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Wynajem.class);
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query q1 = session.createQuery("Select Od, Do from Wynajem WHERE samochodyList =:id");
+        q1.setParameter("id", idSamochoduText.getValue());
+        List allpatients1;
+        LocalDate d = od.getValue();
+        LocalDate d1 = dodata.getValue();
+        allpatients1=  ((org.hibernate.query.Query<?>) q1).list();
+        for (Iterator it = allpatients1.iterator(); it.hasNext(); ) {
+            Object[] myResult = (Object[]) it.next();
+            LocalDate od = (LocalDate) myResult[0];
+            LocalDate Do = (LocalDate) myResult[1];
+            if (od.compareTo(d) * d.compareTo(od)  >= 0 || od.compareTo(d1) * d.compareTo(od) >= 0){
+                doLabel.setText("jedna z tych data koliduje z istniejacym zamowieniem");
+                doLabel.setVisible(true);
+                System.out.println("jaks data jest pomiedzy");
+                walidaciabool = false;
+                break;
+            }else {
+                doLabel.setVisible(false);
+                walidaciabool = true;
+
+            }
+        }
+
+    }
+
+    //====================
+    public void editData(ActionEvent actionEvent) {
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Wynajem.class);
+
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Wynajem wynajem1 = new Wynajem();
+        wynajem1.setIdWynajem(Integer.parseInt(idWynajemText.getText()));
+        wynajem1.setKlienciList(Integer.parseInt(idKlenciText.getText()));
+        wynajem1.setSamochodyList(Integer.valueOf(idSamochoduid.getText()));
+        wynajem1.setNrRachunku(NrRachunkuText.getText());
+        wynajem1.setCena(Double.parseDouble(CenaText.getText()));
+        wynajem1.setOd(LocalDate.parse(odText.getText()));
+        wynajem1.setDo(LocalDate.parse(doText.getText()));
+        wynajem1.setKomentarz(String.valueOf(KomentarzText.getText()));
+       // walidacja();
+        if (isCyfra(String.valueOf(idSamochoduText.getValue())) && isCyfra(idKlenciText.getText()) && isCyfra(idSamochoduid.getText()) && isCyfra(CenaText.getText()) && isData(odText.getText()))
+            session.update(wynajem1);
+            transaction.commit();
+            session.close();
+
+    }
+
+    public void wybrane() {
+        Wynajem wynajem = tablica.getSelectionModel().getSelectedItem();
+        idWynajemText.setText(String.valueOf(wynajem.getIdWynajem()));
+        idKlenciText.setText(String.valueOf(wynajem.getKlienciList()));
+        idSamochoduid.setText(String.valueOf(wynajem.getSamochodyList()));
+        NrRachunkuText.setText(String.valueOf(wynajem.getNrRachunku()));
+        CenaText.setText(String.valueOf(wynajem.getCena()));
+        odText.setText(String.valueOf(wynajem.getOd()));
+        doText.setText(String.valueOf(wynajem.getDo()));
+        KomentarzText.setText(String.valueOf(wynajem.getKomentarz()));
+    }
 }
