@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20ca5598-9ffd-4b72-a579-a1a1159ebf90" name="Changes" comment="Wynajem">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="20ca5598-9ffd-4b72-a579-a1a1159ebf90" name="Changes" comment="zostala jeszcze walidacja">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/InfoCarControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/InfoCarControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/KlienciController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/KlienciController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/SamochodyControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/SamochodyControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/Walidacjia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/Walidacjia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/WynajemControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/WynajemControler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/model/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/controler/HomeControler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/carrental/model/Wynajem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/carrental/model/Wynajem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/carrental/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/carrental/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/carrental/Samochody.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/Samochody.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/carrental/klienci.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/klienci.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/carrental/wynajem.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/carrental/wynajem.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673287419753</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="zostala jeszcze walidacja">
+      <created>1673896113233</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1673896113234</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,7 +160,8 @@
     <MESSAGE value="wynajem" />
     <MESSAGE value="walidacjia" />
     <MESSAGE value="Wynajem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Wynajem" />
+    <MESSAGE value="zostala jeszcze walidacja" />
+    <option name="LAST_COMMIT_MESSAGE" value="zostala jeszcze walidacja" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -181,17 +185,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/carrental/controler/WynajemControler.java</url>
-          <line>314</line>
+          <line>317</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/carrental/controler/WynajemControler.java</url>
-          <line>298</line>
+          <line>301</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/carrental/controler/WynajemControler.java</url>
-          <line>161</line>
+          <line>164</line>
           <properties class="com.example.carrental.controler.WynajemControler" method="fetchAllData">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

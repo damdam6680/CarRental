@@ -150,7 +150,7 @@ public class SamochodyControler implements Initializable {
         samochody2.setNrRejestracji(RejestracjiaText.getText());
         samochody2.setCenaZaDzien(CenaText.getText());
         walidacja();
-        if(isNrRejestracjiOK(RejestracjiaText.getText()) && isCyfra(CenaText.getText())) {
+        if(isNrRejestracjiOK(RejestracjiaText.getText()) && isCyfra(CenaText.getText())  && isBezZnakowSpecialnych(MarkaText.getText()) && isBezZnakowSpecialnych(ModelText.getText())) {
             session.update(samochody2);
             transaction.commit();
             session.close();
@@ -182,7 +182,7 @@ public class SamochodyControler implements Initializable {
         samochody2.setCenaZaDzien(CenaText.getText());
         walidacja();
 
-        if(isNrRejestracjiOK(RejestracjiaText.getText()) && isCyfra(CenaText.getText())) {
+        if(isNrRejestracjiOK(RejestracjiaText.getText()) && isCyfra(CenaText.getText()) && isBezZnakowSpecialnych(MarkaText.getText()) && isBezZnakowSpecialnych(ModelText.getText())) {
             session.persist(samochody2);
             transaction.commit();
             session.close();
@@ -259,6 +259,18 @@ public class SamochodyControler implements Initializable {
             Clabel.setText("nie podałeś cyfry");
         }else if(isCyfra(CenaText.getText())){
             Clabel.setVisible(false);
+        }
+        if(!isBezZnakowSpecialnych(MarkaText.getText())){
+            Lmarka.setVisible(true);
+            Lmarka.setText("nie moze byc znaków specialnych");
+        }else if(isBezZnakowSpecialnych(MarkaText.getText())){
+            Lmarka.setVisible(false);
+        }
+        if (!isBezZnakowSpecialnych(ModelText.getText())){
+            Lmodel.setVisible(true);
+            Lmodel.setText("nie moze byc znaków specialnych");
+        }else if(isBezZnakowSpecialnych(ModelText.getText())){
+            Lmodel.setVisible(false);
         }
     }
 
