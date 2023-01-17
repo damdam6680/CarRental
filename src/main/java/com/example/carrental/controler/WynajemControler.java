@@ -8,6 +8,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -457,6 +460,7 @@ public class WynajemControler implements Initializable {
         Transaction transaction = session.beginTransaction();
 
         Wynajem wynajem1 = new Wynajem();
+
         wynajem1.setIdWynajem(Integer.parseInt(idWynajemText.getText()));
         wynajem1.setKlienciList(Integer.parseInt(idKlenciText.getText()));
         wynajem1.setSamochodyList(Integer.valueOf(idSamochoduid.getText()));
@@ -483,5 +487,68 @@ public class WynajemControler implements Initializable {
         odText.setText(String.valueOf(wynajem.getOd()));
         doText.setText(String.valueOf(wynajem.getDo()));
         KomentarzText.setText(String.valueOf(wynajem.getKomentarz()));
+    }
+
+    public void usun(ActionEvent actionEvent) {
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Wynajem.class);
+
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Wynajem wynajem1 = new Wynajem();
+
+        wynajem1.setIdWynajem(Integer.parseInt(idWynajemText.getText()));
+        wynajem1.setKlienciList(Integer.parseInt(idKlenciText.getText()));
+        wynajem1.setSamochodyList(Integer.valueOf(idSamochoduid.getText()));
+        wynajem1.setNrRachunku(NrRachunkuText.getText());
+        wynajem1.setCena(Double.parseDouble(CenaText.getText()));
+        wynajem1.setOd(LocalDate.parse(odText.getText()));
+        wynajem1.setDo(LocalDate.parse(doText.getText()));
+        wynajem1.setKomentarz(String.valueOf(KomentarzText.getText()));
+
+
+        session.delete(wynajem1);
+        transaction.commit();
+        session.close();
+    }
+
+    public void wyszukiwanie(KeyEvent keyEvent) {
+        FilteredList<Wynajem> filteredList = new FilteredList<>(samochodyObservableList, e -> true);
+
+        szukaj.textProperty().addListener((Observable, oldValue, newValue) -> {
+            filteredList.setPredicate(predicateKlientData -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String searchKey = newValue.toLowerCase();
+                if (String.valueOf(predicateKlientData.getSamochodyList()).toString().contains(searchKey)) {
+                    return true;
+                } else if (String.valueOf(predicateKlientData.getKlienciList()).toString().contains(searchKey)) {
+                    return true;
+                } else if (String.valueOf(predicateKlientData.getCena()).toString().contains(searchKey)) {
+                    return true;
+                } else if ( String.valueOf(predicateKlientData.getOd()).toString().contains(searchKey)) {
+                    return true;
+                }
+                  else if (String.valueOf(predicateKlientData.getDo()).toString().contains(searchKey)) {
+                    return true;
+                }else if (predicateKlientData.getNrRachunku().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if (predicateKlientData.getKomentarz().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else return String.valueOf(predicateKlientData.getIdWynajem()).toString().contains(searchKey);
+            });
+            SortedList<Wynajem> sortedList = new SortedList<>(filteredList);
+
+            sortedList.comparatorProperty().bind(tablica.comparatorProperty());
+            tablica.setItems(sortedList);
+        });
     }
 }

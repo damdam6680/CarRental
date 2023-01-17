@@ -117,8 +117,8 @@
                               <Text layoutX="14.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="do" />
                               <Text layoutX="14.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Komentarz" />
                               <Button fx:id="editData1" layoutX="14.0" layoutY="433.0" mnemonicParsing="false" onAction="#editData" text="Edytuj" />
-                              <Button layoutX="72.0" layoutY="433.0" mnemonicParsing="false" text="Usun" />
-                              <TextField fx:id="szukaj" layoutX="52.0" layoutY="14.0" prefHeight="25.0" prefWidth="273.0" />
+                              <Button layoutX="72.0" layoutY="433.0" mnemonicParsing="false" onAction="#usun" text="Usun" />
+                              <TextField fx:id="szukaj" layoutX="52.0" layoutY="14.0" onKeyPressed="#wyszukiwanie" prefHeight="25.0" prefWidth="273.0" />
                               <Text layoutX="11.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Szukaj" />
                            </children></Pane>
                      </left>

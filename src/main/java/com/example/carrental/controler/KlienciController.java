@@ -185,4 +185,7 @@ public class KlienciController implements Initializable {
         session.close();
         loadAllData();
     }
+
+    public void edytuj(ActionEvent actionEvent) {
+    }
 }

@@ -21,7 +21,8 @@
       </TableView>
       <Button layoutX="720.0" layoutY="22.0" mnemonicParsing="false" onAction="#dodaj" text="Dodaj" />
       <Button layoutX="833.0" layoutY="22.0" mnemonicParsing="false" onAction="#loadAllData" prefHeight="25.0" prefWidth="66.0" text="Odświerz" />
-      <TextField fx:id="text" layoutX="36.0" layoutY="22.0" onKeyPressed="#wyszukiwanie" prefHeight="25.0" prefWidth="625.0" />
+      <TextField fx:id="text" layoutX="36.0" layoutY="22.0" onKeyPressed="#wyszukiwanie" prefHeight="25.0" prefWidth="609.0" />
       <Button layoutX="774.0" layoutY="22.0" mnemonicParsing="false" onAction="#usun" prefHeight="25.0" prefWidth="48.0" text="Usuń" />
+      <Button layoutX="658.0" layoutY="22.0" mnemonicParsing="false" onAction="#edytuj" prefHeight="25.0" prefWidth="56.0" text="Edytuj" />
    </children>
 </AnchorPane>
