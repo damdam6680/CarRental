@@ -67,9 +67,11 @@ public class HomeControler implements Initializable {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        List q1 = session.createQuery("Select Count(idSamochodu) from Samochody").list();
+        Query q1 = session.createQuery("Select Count(idSamochodu) from Samochody");
 
-        liczba1.setText(q1.toString());
+        Long liczba = (Long) q1.getSingleResult();
+
+        liczba1.setText(String.valueOf(liczba));
 
 
         transaction.commit();
@@ -84,9 +86,11 @@ public class HomeControler implements Initializable {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        List q1 = session.createQuery("Select Count(idKlienci) from Klienci").list();
+        Query q1 = session.createQuery("Select Count(idKlienci) from Klienci");
 
-        liczba.setText(q1.toString());
+        Long liczbaa = (Long) q1.getSingleResult();
+
+        liczba.setText(String.valueOf(liczbaa));
 
 
         transaction.commit();

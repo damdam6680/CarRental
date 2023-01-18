@@ -24,4 +24,8 @@ public class Walidacjia {
 
     public static boolean isBezZnakowSpecialnych(String s){return  s.matches("^[A-Za-z0-9 ]+$");}
 
+    public static boolean isPesel(String s){return  s.matches("^\\d{11}$");}
+
+    public static boolean isNumerTelefonu(String s){return  s.matches("/\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})/");}
+
 }
