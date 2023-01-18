@@ -56,11 +56,6 @@
             <version>6.1.5.Final</version>
         </dependency>
         <dependency>
-            <groupId>com.glazedlists</groupId>
-            <artifactId>glazedlists</artifactId>
-            <version>1.11.0</version>
-        </dependency>
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.31</version>
@@ -70,12 +65,6 @@
             <groupId>org.webjars</groupId>
             <artifactId>font-awesome</artifactId>
             <version>6.2.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.calendarfx</groupId>
-            <artifactId>view</artifactId>
-            <version>11.12.3</version>
         </dependency>
         <dependency>
             <groupId>de.jensd</groupId>
@@ -131,10 +120,6 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>com.example.carrental/com.example.carrental.Main</mainClass>
-                            <options>
-                                <option>--add-exports</option>
-                                <option>javafx.base/com.sun.javafx.event=org.controlsfx.controls</option>
-                            </options>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

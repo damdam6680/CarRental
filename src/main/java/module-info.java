@@ -6,7 +6,6 @@ module com.example.carrental {
     requires java.naming;
     requires java.sql;
     requires jakarta.persistence;
-    requires com.calendarfx.view;
     exports com.example.carrental;
     exports com.example.carrental.model;
     exports com.example.carrental.controler;
