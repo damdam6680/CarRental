@@ -34,8 +34,8 @@
                                     <DatePicker fx:id="od" layoutX="60.0" layoutY="206.0" prefHeight="25.0" prefWidth="273.0" />
                                     <DatePicker fx:id="dodata" layoutX="60.0" layoutY="254.0" prefHeight="25.0" prefWidth="273.0" />
                                     <Text layoutX="59.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr Rachunku" wrappingWidth="83.390625" />
-                                    <Text layoutX="59.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id Klienta" wrappingWidth="83.390625" />
-                                    <Text layoutX="59.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id Samochodu" wrappingWidth="83.390625" />
+                                    <Text layoutX="59.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesel Klienta" wrappingWidth="83.390625" />
+                                    <Text layoutX="59.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr Rejestracji " wrappingWidth="83.390625" />
                                     <Text layoutX="59.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="od" wrappingWidth="83.390625" />
                                     <Text layoutX="59.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="do" wrappingWidth="83.390625" />
                                     <TextArea fx:id="komentarz" layoutX="58.0" layoutY="358.0" prefHeight="70.0" prefWidth="278.0" />

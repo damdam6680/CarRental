@@ -54,7 +54,7 @@ public class InfoCarControler implements Initializable {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
         criteria.from(type);
-        Query query = session.createQuery("from Samochody as s where s.idSamochodu   = :id");
+        Query query = session.createQuery("from Samochody as s where s.NrRejestracji   = :id");
         query.setParameter("id",id);
         List<T> data = query.getResultList();
         return data;

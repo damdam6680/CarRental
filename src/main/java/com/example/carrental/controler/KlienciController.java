@@ -187,5 +187,25 @@ public class KlienciController implements Initializable {
     }
 
     public void edytuj(ActionEvent actionEvent) {
+        try {
+            URL fxmlLocation = getClass().getResource("/com/example/carrental/KlienciUpdate.fxml");
+            System.out.println(fxmlLocation);
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+
+            KlienciUpdate infoKlienciControler1 = fxmlLoader.getController();
+            Klienci klienci1 = tab.getSelectionModel().getSelectedItem();
+            System.out.println(klienci1.getIdKlienci());
+            infoKlienciControler1.fetchData(String.valueOf(klienci1.getIdKlienci()));
+            infoKlienciControler1.wypisz();
+
+
+            stage.setTitle("Edytuj Klienta");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }

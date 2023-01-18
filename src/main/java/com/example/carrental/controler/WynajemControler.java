@@ -19,7 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.Session;
@@ -186,14 +185,14 @@ public class WynajemControler implements Initializable {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
         criteria.from(type);
-        return (List<T>) session.createQuery("select idSamochodu from Samochody").getResultList();
+        return (List<T>) session.createQuery("select NrRejestracji from Samochody").getResultList();
     }
 
     private static <T> List<T> loadAllDataKlienta(Class<T> type, Session session) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
         criteria.from(type);
-        List<T> data = session.createQuery("select idKlienci  from Klienci").getResultList();
+        List<T> data = session.createQuery("select pesel  from Klienci").getResultList();
         return data;
     }
 
@@ -238,13 +237,22 @@ public class WynajemControler implements Initializable {
             SessionFactory factory = config.buildSessionFactory(builder.build());
             Session session = factory.openSession();
             Transaction transaction = session.beginTransaction();
-            Query query = session.createQuery("Select CenaZaDzien from Samochody WHERE idSamochodu = :id");
+            Query query = session.createQuery("Select CenaZaDzien from Samochody WHERE NrRejestracji = :id");
             query.setParameter("id", idSamochoduText.getValue());
             cena1 = query.getSingleResult().toString();
+
+            Query query1 = session.createQuery("Select idSamochodu  From Samochody WHERE NrRejestracji = :id");
+            query1.setParameter("id", idSamochoduText.getValue());
+            System.out.println(query1.getResultList());
+
+
+
+
             Oblicz();
-            transaction.commit();
+        WyswietlDate(query1.getResultList());
+
+        transaction.commit();
             session.close();
-            WyswietlDate();
 
     }
 
@@ -384,7 +392,7 @@ public class WynajemControler implements Initializable {
         cena.setText(String.valueOf(liczbadni * Integer.parseInt(cena1)));
     }
 
-    public void WyswietlDate() {
+    public void WyswietlDate(List id) {
 
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Wynajem.class);
@@ -394,8 +402,9 @@ public class WynajemControler implements Initializable {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
         List allpatients;
+        //TODO to zmienic
         Query q1 = session.createQuery("Select Od, Do from Wynajem WHERE samochodyList =:id");
-        q1.setParameter("id", idSamochoduText.getValue());
+        q1.setParameter("id", id.get(0));
         String datay = "";
         String dotay = "";
         allpatients=  ((org.hibernate.query.Query<?>) q1).list();

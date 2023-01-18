@@ -56,7 +56,7 @@ public class InfoKlienciControler {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
         criteria.from(type);
-        Query query = session.createQuery("from Klienci as s where s.idKlienci  = :id");
+        Query query = session.createQuery("from Klienci as s where s.pesel  = :id");
         query.setParameter("id",id);
         List<T> data = query.getResultList();
         return data;

@@ -7,40 +7,40 @@
 
 <AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.HomeControler">
    <children>
-      <Pane layoutX="109.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: limegreen;">
+      <Pane layoutX="305.0" layoutY="211.0" prefHeight="164.0" prefWidth="310.0" style="-fx-background-color: limegreen; -fx-background-radius: 30;">
          <children>
-            <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liczba Klientów" wrappingWidth="84.13671875">
+            <Text layoutX="20.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liczba Klientów" wrappingWidth="84.13671875">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fx:id="liczba" layoutX="100.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="liczba" layoutX="201.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
          </children></Pane>
-      <Pane layoutX="360.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: deepskyblue;">
+      <Pane layoutX="305.0" layoutY="25.0" prefHeight="164.0" prefWidth="310.0" style="-fx-background-color: deepskyblue; -fx-background-radius: 30;">
          <children>
-            <Text layoutX="7.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Liczba Samochodów" wrappingWidth="103.13671875">
+            <Text layoutX="14.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Liczba Samochodów" wrappingWidth="103.13671875">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fx:id="liczba1" layoutX="110.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="liczba1" layoutX="193.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
          </children></Pane>
-      <Pane layoutX="609.0" layoutY="58.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: red;">
+      <Pane layoutX="305.0" layoutY="408.0" prefHeight="164.0" prefWidth="310.0" style="-fx-background-color: red; -fx-background-radius: 30;">
          <children>
-            <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Liczba Taransakcji" wrappingWidth="103.13671875">
+            <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Liczba Taransakcji" wrappingWidth="103.13671875">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fx:id="liczba11" layoutX="117.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="liczba11" layoutX="206.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
                   <Font size="20.0" />
                </font>
