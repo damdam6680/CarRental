@@ -129,8 +129,6 @@ public class WynajemControler implements Initializable {
     @FXML
     private TextField szukaj;
 
-
-
     private List<Samochody> samochodylist;
     private List<Klienci> KlienciList;
 
@@ -139,7 +137,8 @@ public class WynajemControler implements Initializable {
     static String cena1;
     boolean walidaciabool = false;
 
-
+    static List idSamochodu;
+    static List idKlienta;
     ObservableList<Wynajem> samochodyObservableList = FXCollections.observableArrayList();
 
     ObservableList<Wynajem> DatayObseravbleList = FXCollections.observableArrayList();
@@ -284,7 +283,7 @@ public class WynajemControler implements Initializable {
             query1.setParameter("id", idSamochoduText.getValue());
             System.out.println(query1.getResultList());
 
-
+            idSamochodu = query1.getResultList();
 
 
             Oblicz();
@@ -329,8 +328,8 @@ public class WynajemControler implements Initializable {
             wynajem.setCena(Double.parseDouble(cena.getText()));
             wynajem.setDo(dodata.getValue());
             wynajem.setOd(od.getValue());
-            wynajem.setKlienciList(Integer.valueOf(String.valueOf(idKleinta123.getValue())));
-            wynajem.setSamochodyList(Integer.valueOf(String.valueOf(idSamochoduText.getValue())));
+            wynajem.setKlienciList(Integer.valueOf(String.valueOf(idKlienta.get(0))));
+            wynajem.setSamochodyList(Integer.valueOf(String.valueOf(idSamochodu.get(0))));
             wynajem.setKomentarz(komentarz.getText());
             session.persist(wynajem);
             transaction.commit();
@@ -496,7 +495,7 @@ public class WynajemControler implements Initializable {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
         Query q1 = session.createQuery("Select Od, Do from Wynajem WHERE samochodyList =:id");
-        q1.setParameter("id", idSamochoduText.getValue());
+        q1.setParameter("id", idSamochodu.get(0));
         List allpatients1;
         LocalDate d = od.getValue();
         LocalDate d1 = dodata.getValue();
@@ -641,5 +640,21 @@ public class WynajemControler implements Initializable {
             sortedList.comparatorProperty().bind(tablica.comparatorProperty());
             tablica.setItems(sortedList);
         });
+    }
+
+    public void PobierzIdKlienta(ActionEvent actionEvent) {
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Klienci.class);
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("Select idKlienci from Klienci WHERE pesel = :id");
+        query.setParameter("id", idKleinta123.getValue());
+        idKlienta = query.getResultList();
+        System.out.println(query.getResultList());
+        transaction.commit();
+        session.close();
     }
 }
