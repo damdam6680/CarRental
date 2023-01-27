@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 import static com.example.carrental.controler.Walidacjia.*;
 
+
 public class DodajKlientaControler implements Initializable {
 
     @FXML

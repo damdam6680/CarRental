@@ -34,7 +34,10 @@ import java.util.*;
 
 import static com.example.carrental.controler.Walidacjia.*;
 
-
+/**
+ * Ta Klasa słuzy do opsługi Zakładki Wynajem
+ *
+ */
 public class WynajemControler implements Initializable {
 
     @FXML
@@ -126,8 +129,6 @@ public class WynajemControler implements Initializable {
     @FXML
     private TextField szukaj;
 
-
-
     private List<Samochody> samochodylist;
     private List<Klienci> KlienciList;
 
@@ -136,7 +137,8 @@ public class WynajemControler implements Initializable {
     static String cena1;
     boolean walidaciabool = false;
 
-
+    static List idSamochodu;
+    static List idKlienta;
     ObservableList<Wynajem> samochodyObservableList = FXCollections.observableArrayList();
 
     ObservableList<Wynajem> DatayObseravbleList = FXCollections.observableArrayList();
@@ -161,6 +163,10 @@ public class WynajemControler implements Initializable {
 
     }
 
+    /**
+     * Ta Klasa służy do tworzenia sesji i określenia configuracji hibernata
+     *
+     */
     public void fetchAllData() {
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Samochody.class);
@@ -181,6 +187,14 @@ public class WynajemControler implements Initializable {
         session.close();
     }
 
+    /**
+     * Ta Klasa słuzy do wysyłania zapytania do Tabeli Samochody
+     * @param type
+     * @param session
+     * @return
+     * @param <T>
+     */
+
     private static <T> List<T> loadAllDataCar(Class<T> type, Session session) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
@@ -188,6 +202,13 @@ public class WynajemControler implements Initializable {
         return (List<T>) session.createQuery("select NrRejestracji from Samochody").getResultList();
     }
 
+    /**
+     * Ta Klasa słuzy do wysyłania zapytania do Tabeli Klienci
+     * @param type
+     * @param session
+     * @return
+     * @param <T>
+     */
     private static <T> List<T> loadAllDataKlienta(Class<T> type, Session session) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
@@ -196,6 +217,13 @@ public class WynajemControler implements Initializable {
         return data;
     }
 
+    /**
+     * Ta Klasa słuzy do wysyłania zapytania do Tabeli Wynajem
+     * @param type
+     * @param session
+     * @return
+     * @param <T>
+     */
     private static <T> List<T> loadAllWynajemKlienta(Class<T> type, Session session) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
@@ -204,6 +232,11 @@ public class WynajemControler implements Initializable {
         return data;
     }
 
+    /**
+     * Ta klasa słuzy do otwarcia nowego okna z informacjami o samochodzie
+     * Przekazuje parametr z ComoBoxa do Klasy InfoCarControler
+     * @param actionEvent
+     */
     public void InfoSamochody(ActionEvent actionEvent) {
         if(idSamochoduText.getValue() != null) {
             try {
@@ -229,6 +262,11 @@ public class WynajemControler implements Initializable {
         }
     }
 
+    /**
+     * Przy zmiane prametru w ComoBoxie zostaja wysłąne zapytanie o dane wartosci samochodu
+     * Funkcja wywołuje jeszcze 2 inne funkcjie Oblicz() i WyswietlDate
+     * @param actionEvent
+     */
     public void WyswietlCene(ActionEvent actionEvent) {
             Configuration config = new Configuration().configure();
             config.addAnnotatedClass(Samochody.class);
@@ -245,7 +283,7 @@ public class WynajemControler implements Initializable {
             query1.setParameter("id", idSamochoduText.getValue());
             System.out.println(query1.getResultList());
 
-
+            idSamochodu = query1.getResultList();
 
 
             Oblicz();
@@ -256,12 +294,20 @@ public class WynajemControler implements Initializable {
 
     }
 
+    /**
+     * Funkcja generuje losowy ciąg znaków jako nr rachunku
+     * @param actionEvent
+     */
     public void Wygeneruj(ActionEvent actionEvent) {
         String generatedString = RandomStringUtils.randomAlphabetic(16).toUpperCase(Locale.ROOT);
 
         NrRachunku.setText(generatedString);
     }
 
+    /**
+     * Funkcja dodaje dane do bazy danych i sprawdza czy dane sa poprawne
+     * @param actionEvent
+     */
     public void Dodaj(ActionEvent actionEvent) {
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Wynajem.class);
@@ -282,8 +328,8 @@ public class WynajemControler implements Initializable {
             wynajem.setCena(Double.parseDouble(cena.getText()));
             wynajem.setDo(dodata.getValue());
             wynajem.setOd(od.getValue());
-            wynajem.setKlienciList(Integer.valueOf(String.valueOf(idKleinta123.getValue())));
-            wynajem.setSamochodyList(Integer.valueOf(String.valueOf(idSamochoduText.getValue())));
+            wynajem.setKlienciList(Integer.valueOf(String.valueOf(idKlienta.get(0))));
+            wynajem.setSamochodyList(Integer.valueOf(String.valueOf(idSamochodu.get(0))));
             wynajem.setKomentarz(komentarz.getText());
             session.persist(wynajem);
             transaction.commit();
@@ -292,7 +338,11 @@ public class WynajemControler implements Initializable {
         session.close();
     }
 
-
+    /**
+     * Ta klasa słuzy do otwarcia nowego okna z informacjami o Kliencie
+     * Przekazuje parametr z ComoBoxa do Klasy InfoKlienciKontroler
+     * @param actionEvent
+     */
     public void wiecejOpen(ActionEvent actionEvent) {
         if(idKleinta123.getValue() != null) {
             try {
@@ -322,6 +372,9 @@ public class WynajemControler implements Initializable {
 
     }
 
+    /**
+     * Ta Funkcja Słuzy do wpisanaia informacji o błednych danych
+     */
     public void walidacja() {
         if (!isCyfra(cena.getText()) || cena.getText().equals("")) {
             CenaError.setVisible(true);
@@ -383,7 +436,9 @@ public class WynajemControler implements Initializable {
 
     }
 
-
+    /**
+     * Funckaj oblicza Cene wypożyczenia
+     */
     public void Oblicz() {
         int liczbadni = 0;
         if (od.getValue() != null && dodata.getValue() != null) {
@@ -392,6 +447,10 @@ public class WynajemControler implements Initializable {
         cena.setText(String.valueOf(liczbadni * Integer.parseInt(cena1)));
     }
 
+    /**
+     * Ta Funkcja wyswietla Date od i do wpożyczenia danego samochodu
+     * @param id
+     */
     public void WyswietlDate(List id) {
 
         Configuration config = new Configuration().configure();
@@ -402,7 +461,7 @@ public class WynajemControler implements Initializable {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
         List allpatients;
-        //TODO to zmienic
+
         Query q1 = session.createQuery("Select Od, Do from Wynajem WHERE samochodyList =:id");
         q1.setParameter("id", id.get(0));
         String datay = "";
@@ -423,6 +482,10 @@ public class WynajemControler implements Initializable {
 
 
     }
+
+    /**
+     * Ta Funkcja Sprawdza czy Daty nie Koliduja z innymi danymi7
+     */
     public void SprawdzicCzyNieKoliduje(){
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Wynajem.class);
@@ -432,7 +495,7 @@ public class WynajemControler implements Initializable {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
         Query q1 = session.createQuery("Select Od, Do from Wynajem WHERE samochodyList =:id");
-        q1.setParameter("id", idSamochoduText.getValue());
+        q1.setParameter("id", idSamochodu.get(0));
         List allpatients1;
         LocalDate d = od.getValue();
         LocalDate d1 = dodata.getValue();
@@ -457,6 +520,11 @@ public class WynajemControler implements Initializable {
     }
 
     //====================
+
+    /**
+     * Funckaj służy do aktualizacji danych w bazie danych i sprawdza czy dane sa poprawne
+     * @param actionEvent
+     */
     public void editData(ActionEvent actionEvent) {
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Wynajem.class);
@@ -478,7 +546,6 @@ public class WynajemControler implements Initializable {
         wynajem1.setOd(LocalDate.parse(odText.getText()));
         wynajem1.setDo(LocalDate.parse(doText.getText()));
         wynajem1.setKomentarz(String.valueOf(KomentarzText.getText()));
-       // walidacja();
         if (isCyfra(String.valueOf(idSamochoduText.getValue())) && isCyfra(idKlenciText.getText()) && isCyfra(idSamochoduid.getText()) && isCyfra(CenaText.getText()) && isData(odText.getText()))
             session.update(wynajem1);
             transaction.commit();
@@ -486,6 +553,9 @@ public class WynajemControler implements Initializable {
 
     }
 
+    /**
+     * Funkcja wpisuje po kliknieciu rekordu z tabeli dane do textfildów
+     */
     public void wybrane() {
         Wynajem wynajem = tablica.getSelectionModel().getSelectedItem();
         idWynajemText.setText(String.valueOf(wynajem.getIdWynajem()));
@@ -498,6 +568,12 @@ public class WynajemControler implements Initializable {
         KomentarzText.setText(String.valueOf(wynajem.getKomentarz()));
     }
 
+    /**
+     * Funcka służy do usuwania rekordu z bazy danych
+     * Funkcja pobiera dane z TextFlidow
+     * I wysyła zapytanie o usuniece do bazy danych
+     * @param actionEvent
+     */
     public void usun(ActionEvent actionEvent) {
         Configuration config = new Configuration().configure();
         config.addAnnotatedClass(Wynajem.class);
@@ -526,6 +602,11 @@ public class WynajemControler implements Initializable {
         session.close();
     }
 
+    /**
+     * Funkcja słuzy do przeszukiwania danych w tabelce
+     * Pobiera Klucz z TextFilda i sprawdza czy wpisany klucz nie zawiera jakiegość pola z tabeli
+     * @param keyEvent
+     */
     public void wyszukiwanie(KeyEvent keyEvent) {
         FilteredList<Wynajem> filteredList = new FilteredList<>(samochodyObservableList, e -> true);
 
@@ -559,5 +640,21 @@ public class WynajemControler implements Initializable {
             sortedList.comparatorProperty().bind(tablica.comparatorProperty());
             tablica.setItems(sortedList);
         });
+    }
+
+    public void PobierzIdKlienta(ActionEvent actionEvent) {
+        Configuration config = new Configuration().configure();
+        config.addAnnotatedClass(Klienci.class);
+        StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+        SessionFactory factory = config.buildSessionFactory(builder.build());
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("Select idKlienci from Klienci WHERE pesel = :id");
+        query.setParameter("id", idKleinta123.getValue());
+        idKlienta = query.getResultList();
+        System.out.println(query.getResultList());
+        transaction.commit();
+        session.close();
     }
 }
