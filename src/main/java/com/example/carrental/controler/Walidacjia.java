@@ -26,6 +26,6 @@ public class Walidacjia {
 
     public static boolean isPesel(String s){return  s.matches("^\\d{11}$");}
 
-    public static boolean isNumerTelefonu(String s){return  s.matches("/\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})/");}
+    public static boolean isNumerTelefonu(String s){return  s.matches(" ^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$ ");}
 
 }

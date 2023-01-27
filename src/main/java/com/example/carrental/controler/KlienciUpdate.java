@@ -133,15 +133,8 @@ public class KlienciUpdate {
                 && isBezZnakowSpecialnych(idImie.getText())
                 && isBezZnakowSpecialnych(idNazwisko.getText())
                 && isPesel(idPresel.getText())
-                && isCyfra(idTelefon.getText())
                 && isCyfra(idPrawoJazdy.getText())
-                && idText.getText() == ""
-                && idAdress.getText() == ""
-                && idImie.getText() == ""
-                && idNazwisko.getText() == ""
-                && idPresel.getText() == ""
-                && idTelefon.getText() == ""
-                && idPrawoJazdy.getText() == ""
+                && isCyfra(idTelefon.getText())
 
         ) {
             session.update(klienci);
