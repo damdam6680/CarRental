@@ -142,7 +142,7 @@ public class WynajemControler implements Initializable {
     ObservableList<Wynajem> samochodyObservableList = FXCollections.observableArrayList();
 
     ObservableList<Wynajem> DatayObseravbleList = FXCollections.observableArrayList();
-
+    //TODO dadac walidacjie do dodac i usun
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idWynajemtab.setCellValueFactory(new PropertyValueFactory<Wynajem, Integer>("idWynajem"));
@@ -323,7 +323,7 @@ public class WynajemControler implements Initializable {
 
         walidacja();
         SprawdzicCzyNieKoliduje();
-        if (isCyfra(cena.getText()) && !cena.getText().isEmpty() && idKleinta123.getValue() != null && idSamochoduText.getValue() != null && dodata.getValue() != null && od.getValue() != null && !isOdWieksza(dodata.getValue(), od.getValue()) && !isPrzeszlosc(dodata.getValue(), od.getValue()) && !Objects.equals(NrRachunku.getText(), "") && walidaciabool == true) {
+
             wynajem.setNrRachunku(NrRachunku.getText());
             wynajem.setCena(Double.parseDouble(cena.getText()));
             wynajem.setDo(dodata.getValue());
@@ -334,7 +334,7 @@ public class WynajemControler implements Initializable {
             session.persist(wynajem);
             transaction.commit();
 
-        }
+
         session.close();
     }
 
@@ -444,7 +444,7 @@ public class WynajemControler implements Initializable {
         if (od.getValue() != null && dodata.getValue() != null) {
             liczbadni = (int) ChronoUnit.DAYS.between(od.getValue(), dodata.getValue());
         }
-        cena.setText(String.valueOf(liczbadni * Integer.parseInt(cena1)));
+        cena.setText(String.valueOf( liczbadni * Double.parseDouble(cena1)));
     }
 
     /**
@@ -546,7 +546,7 @@ public class WynajemControler implements Initializable {
         wynajem1.setOd(LocalDate.parse(odText.getText()));
         wynajem1.setDo(LocalDate.parse(doText.getText()));
         wynajem1.setKomentarz(String.valueOf(KomentarzText.getText()));
-        if (isCyfra(String.valueOf(idSamochoduText.getValue())) && isCyfra(idKlenciText.getText()) && isCyfra(idSamochoduid.getText()) && isCyfra(CenaText.getText()) && isData(odText.getText()))
+
             session.update(wynajem1);
             transaction.commit();
             session.close();
