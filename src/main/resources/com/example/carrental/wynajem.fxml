@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -83,22 +84,8 @@
           <Tab text="lista wynajem">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <TableView fx:id="tablica" onMouseClicked="#wybrane" prefHeight="570.0" prefWidth="540.0" BorderPane.alignment="CENTER">
-                          <columns>
-                            <TableColumn fx:id="idWynajemtab" prefWidth="75.0" text="idWynajem " />
-                            <TableColumn fx:id="idKliencitab" prefWidth="75.0" text="idKlienci " />
-                              <TableColumn fx:id="idSamochodutab" prefWidth="90.0" text="idSamochodu " />
-                              <TableColumn fx:id="NrRachunkutab" prefWidth="79.0" text="NrRachunku" />
-                              <TableColumn fx:id="cenatab" prefWidth="38.0" text="Cena" />
-                              <TableColumn fx:id="odtab" prefWidth="55.0" text="od" />
-                              <TableColumn fx:id="dotab" prefWidth="55.0" text="do" />
-                              <TableColumn fx:id="komentarztab" prefWidth="115.0" text="Kometarz" />
-                          </columns>
-                        </TableView>
-                     </center>
                      <left>
-                        <Pane prefHeight="611.0" prefWidth="337.0" BorderPane.alignment="CENTER">
+                        <Pane prefHeight="516.0" prefWidth="337.0" BorderPane.alignment="CENTER">
                            <children>
                               <TextField fx:id="idWynajemText" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="309.0" />
                               <TextField fx:id="idKlenciText" layoutX="14.0" layoutY="107.0" prefHeight="25.0" prefWidth="309.0" />
@@ -122,6 +109,25 @@
                               <Text layoutX="11.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Szukaj" />
                            </children></Pane>
                      </left>
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TableView fx:id="tablica" layoutX="26.0" layoutY="83.0" onMouseClicked="#wybrane" prefHeight="514.0" prefWidth="586.0">
+                                <columns>
+                                  <TableColumn fx:id="idWynajemtab" prefWidth="75.0" text="idWynajem " />
+                                  <TableColumn fx:id="idKliencitab" prefWidth="75.0" text="idKlienci " />
+                                    <TableColumn fx:id="idSamochodutab" prefWidth="90.0" text="idSamochodu " />
+                                    <TableColumn fx:id="NrRachunkutab" prefWidth="79.0" text="NrRachunku" />
+                                    <TableColumn fx:id="cenatab" prefWidth="38.0" text="Cena" />
+                                    <TableColumn fx:id="odtab" prefWidth="55.0" text="od" />
+                                    <TableColumn fx:id="dotab" prefWidth="55.0" text="do" />
+                                    <TableColumn fx:id="komentarztab" prefWidth="115.0" text="Kometarz" />
+                                </columns>
+                              </TableView>
+                              <Pagination fx:id="paginacja" layoutX="6.0" layoutY="2.0" prefHeight="603.0" prefWidth="572.0" />
+                           </children>
+                        </Pane>
+                     </center>
                   </BorderPane>
                </content></Tab>
         </tabs>

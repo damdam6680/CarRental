@@ -32,6 +32,9 @@ public class Wynajem {
     @Column(name = "Cena")
     private double Cena;
 
+    @Column(name = "Oddano")
+    private boolean Oddano;
+
     @Basic
     @Temporal(TemporalType.DATE)
     @Column(name = "Od")
@@ -40,6 +43,8 @@ public class Wynajem {
     @Temporal(TemporalType.DATE)
     @Column(name = "Do")
     private LocalDate Do;
+
+
 
     @Column(name = "Komentarz")
     private String Komentarz;
@@ -106,6 +111,14 @@ public class Wynajem {
 
     public void setKomentarz(String komentarz) {
         Komentarz = komentarz;
+    }
+
+    public boolean isOddano() {
+        return Oddano;
+    }
+
+    public void setOddano(boolean oddano) {
+        Oddano = oddano;
     }
 
     @Override

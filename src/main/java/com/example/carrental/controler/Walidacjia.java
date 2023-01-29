@@ -17,7 +17,7 @@ public class Walidacjia {
     }
 
     public static boolean isPrzeszlosc(LocalDate d, LocalDate o){
-        return  o.isBefore(LocalDate.now()) && d.isBefore(LocalDate.now());
+        return  o.isBefore(LocalDate.now()) || d.isBefore(LocalDate.now());
     }
 
     public static boolean isData(String s){return  s.matches("^\\d{1,2}-[a-zA-Z]{3}-\\d{4}$");}

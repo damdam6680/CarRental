@@ -6,22 +6,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="640.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controler.CzyOddano">
    <children>
-      <TableView layoutX="34.0" layoutY="73.0" prefHeight="466.0" prefWidth="679.0">
+      <TableView fx:id="tab" layoutX="34.0" layoutY="73.0" onMouseClicked="#wybrane" prefHeight="466.0" prefWidth="854.0">
         <columns>
-          <TableColumn prefWidth="93.0" text="Marka" />
-          <TableColumn prefWidth="103.0" text="Model" />
-            <TableColumn prefWidth="107.0" text="od" />
-            <TableColumn prefWidth="103.0" text="do" />
-            <TableColumn prefWidth="82.0" text="czy zwrocono" />
-            <TableColumn prefWidth="190.0" text="do zaplaty" />
+          <TableColumn fx:id="IdSamochodu" prefWidth="93.0" text="IdSamochodu" />
+          <TableColumn fx:id="IdKlienta" prefWidth="103.0" text="IdKlienta" />
+            <TableColumn fx:id="odTable" prefWidth="107.0" text="od" />
+            <TableColumn fx:id="doTable" prefWidth="103.0" text="do" />
+            <TableColumn fx:id="czyZw" prefWidth="82.0" text="czy zwrocono" />
+            <TableColumn fx:id="doZaplaty" prefWidth="190.0" text="do zaplaty" />
+            <TableColumn fx:id="IdKlienta1" prefWidth="175.0" text="Nr Rachunku" />
         </columns>
       </TableView>
-      <Button layoutX="752.0" layoutY="204.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="147.0" text="Button" />
-      <Button layoutX="752.0" layoutY="308.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="64.0" text="Button" />
-      <Button layoutX="835.0" layoutY="308.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="64.0" text="Button" />
-      <TextField layoutX="34.0" layoutY="37.0" prefHeight="25.0" prefWidth="679.0" />
+      <Button layoutX="627.0" layoutY="560.0" mnemonicParsing="false" onAction="#editData" prefHeight="25.0" prefWidth="147.0" text="Zakceptuj zwrot" />
+      <TextField fx:id="szukaj" layoutX="34.0" layoutY="37.0" onKeyPressed="#wyszukiwanie" prefHeight="25.0" prefWidth="679.0" />
+      <Button layoutX="551.0" layoutY="560.0" mnemonicParsing="false" onAction="#odswierz" text="Odswierz" />
    </children>
 </AnchorPane>

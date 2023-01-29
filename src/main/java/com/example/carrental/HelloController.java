@@ -40,4 +40,8 @@ public class HelloController {
     }
 
 
+    public void OpenZwrot(ActionEvent actionEvent) throws IOException {
+        Pane v = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CzyOddano.fxml")));
+        root.setCenter(v);
+    }
 }
