@@ -14,11 +14,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -82,6 +81,8 @@ public class SamochodyControler implements Initializable {
     @FXML
     private TextField SaearchBar;
 
+    @FXML
+    private Pagination paginacja;
     private List<Samochody> samochodylist;
 
 
@@ -121,8 +122,27 @@ public class SamochodyControler implements Initializable {
         samochodyObservableList.addAll(samochodylist);
         tabela.setItems(samochodyObservableList);
 
+        int pagination = 1;
+        if (samochodyObservableList.size() % rowsPerPage() == 0) {
+            pagination = samochodyObservableList.size() / rowsPerPage();
+        } else if (samochodyObservableList.size() > rowsPerPage()) {
+            pagination = samochodyObservableList.size() / rowsPerPage() + 1;
+        }
+        paginacja.setPageCount(pagination);
+        paginacja.setCurrentPageIndex(0);
+        paginacja.setPageFactory(this::createPage);
+
+    }
+    public int rowsPerPage() {
+        return 20;
     }
 
+    private Node createPage(int pageIndex) {
+        int fromIndex = pageIndex * rowsPerPage();
+        int toIndex = Math.min(fromIndex + rowsPerPage(), samochodyObservableList.size());
+        tabela.setItems(FXCollections.observableArrayList(samochodyObservableList.subList(fromIndex, toIndex)));
+        return new BorderPane(tabela);
+    }
     public void wybrane() {
         Samochody samochody1 = tabela.getSelectionModel().getSelectedItem();
         idText.setText(String.valueOf(samochody1.getIdSamochodu()));
@@ -217,6 +237,14 @@ public class SamochodyControler implements Initializable {
         fetchData();
         samochodyObservableList.removeAll(samochodyObservableList);
         samochodyObservableList.addAll(samochodylist);
+        int pagination = 1;
+        if (samochodyObservableList.size() % rowsPerPage() == 0) {
+            pagination = samochodyObservableList.size() / rowsPerPage();
+        } else if (samochodyObservableList.size() > rowsPerPage()) {
+            pagination = samochodyObservableList.size() / rowsPerPage() + 1;
+        }
+        paginacja.setPageCount(pagination);
+        paginacja.setPageFactory(this::createPage);
     }
     public void wyszukiwanie() {
         FilteredList<Samochody> filteredList = new FilteredList<>(samochodyObservableList, e -> true);

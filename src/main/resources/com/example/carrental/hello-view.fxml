@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.HelloController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.HelloController">
    <left>
       <Pane prefHeight="640.0" prefWidth="120.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
          <children>
@@ -13,7 +12,8 @@
             <Button layoutX="-2.0" layoutY="110.0" mnemonicParsing="false" onAction="#OpenHome" prefHeight="25.0" prefWidth="121.0" stylesheets="@style.css" text="Home" />
             <Button layoutX="-1.0" layoutY="150.0" mnemonicParsing="false" onAction="#printHelloWorld" prefHeight="25.0" prefWidth="121.0" text="Samochody" />
             <Button layoutX="-1.0" layoutY="190.0" mnemonicParsing="false" onAction="#OpenRents" prefHeight="25.0" prefWidth="121.0" text="Wpozycz" />
-            <Button layoutY="230.0" mnemonicParsing="false" onAction="#OpenKlients" prefHeight="25.0" prefWidth="121.0" text="Klienci" />
+            <Button layoutX="-2.0" layoutY="238.0" mnemonicParsing="false" onAction="#OpenKlients" prefHeight="25.0" prefWidth="121.0" text="Klienci" />
+            <Button layoutY="282.0" mnemonicParsing="false" onAction="#OpenZwrot" prefHeight="25.0" prefWidth="120.0" text="Zwrot" />
          </children>
       </Pane>
    </left>

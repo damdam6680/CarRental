@@ -16,10 +16,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -66,6 +68,9 @@ public class KlienciController implements Initializable {
     @FXML
     private TextField text;
 
+    @FXML
+    private Pagination paginacja;
+
     public List<Klienci> KlienciList;
 
     ObservableList<Klienci> KlienciObservableList = FXCollections.observableArrayList();
@@ -85,6 +90,27 @@ public class KlienciController implements Initializable {
         }
         tab.setItems(KlienciObservableList);
 
+
+        int pagination = 1;
+        if (KlienciObservableList.size() % rowsPerPage() == 0) {
+            pagination = KlienciObservableList.size() / rowsPerPage();
+        } else if (KlienciObservableList.size() > rowsPerPage()) {
+            pagination = KlienciObservableList.size() / rowsPerPage() + 1;
+        }
+        paginacja.setPageCount(pagination);
+        paginacja.setCurrentPageIndex(0);
+        paginacja.setPageFactory(this::createPage);
+    }
+
+    public int rowsPerPage() {
+        return 20;
+    }
+
+    private Node createPage(int pageIndex) {
+        int fromIndex = pageIndex * rowsPerPage();
+        int toIndex = Math.min(fromIndex + rowsPerPage(), KlienciObservableList.size());
+        tab.setItems(FXCollections.observableArrayList(KlienciObservableList.subList(fromIndex, toIndex)));
+        return new BorderPane(tab);
     }
 
     public void fetchData() {
@@ -164,6 +190,14 @@ public class KlienciController implements Initializable {
         for (Klienci temp : KlienciList) {
             KlienciObservableList.add(temp);
         }
+        int pagination = 1;
+        if (KlienciObservableList.size() % rowsPerPage() == 0) {
+            pagination = KlienciObservableList.size() / rowsPerPage();
+        } else if (KlienciObservableList.size() > rowsPerPage()) {
+            pagination = KlienciObservableList.size() / rowsPerPage() + 1;
+        }
+        paginacja.setPageCount(pagination);
+        paginacja.setPageFactory(this::createPage);
         System.out.println("zaczytane");
     }
 

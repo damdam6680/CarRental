@@ -17,7 +17,7 @@ public class Walidacjia {
     }
 
     public static boolean isPrzeszlosc(LocalDate d, LocalDate o){
-        return  o.isBefore(LocalDate.now()) && d.isBefore(LocalDate.now());
+        return  o.isBefore(LocalDate.now()) || d.isBefore(LocalDate.now());
     }
 
     public static boolean isData(String s){return  s.matches("^\\d{1,2}-[a-zA-Z]{3}-\\d{4}$");}
@@ -26,6 +26,6 @@ public class Walidacjia {
 
     public static boolean isPesel(String s){return  s.matches("^\\d{11}$");}
 
-    public static boolean isNumerTelefonu(String s){return  s.matches("/\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})/");}
+    public static boolean isNumerTelefonu(String s){return  s.matches(" ^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$ ");}
 
 }

@@ -90,19 +90,13 @@ public class DodajKlientaControler implements Initializable {
         klienci.setPrawoJazdy(idPrawoJazdy.getText());
         klienci.setPesel(idPesel.getText());
         Walidacja();
-        if(isBezZnakowSpecialnych(idImie.getText())
+        if(isBezZnakowSpecialnych(idAdres.getText())
+                && isBezZnakowSpecialnych(idImie.getText())
                 && isBezZnakowSpecialnych(idNazwisko.getText())
-                && isBezZnakowSpecialnych(idAdres.getText())
-                && isCyfra(idTelefon.getText())
-                && isCyfra(idPrawoJazdy.getText())
                 && isPesel(idPesel.getText())
-                && idText.getText() != ""
-                && idAdres.getText() != ""
-                && idImie.getText() != ""
-                && idNazwisko.getText() != ""
-                && idPesel.getText() != ""
-                && idTelefon.getText() != ""
-                && idPrawoJazdy.getText() != ""
+                && isCyfra(idPrawoJazdy.getText())
+                && isCyfra(idTelefon.getText())
+
         ) {
             session.persist(klienci);
             transaction.commit();
